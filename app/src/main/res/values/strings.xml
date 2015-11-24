@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">HCI4</string>
+    <string name="action_settings">Settings</string>
+    <string name="menuHistoryText">History</string>
+    <string name="menuEditProfileText">Edit Profile</string>
+    <string name="menuFeedbackText">Send us Feedback</string>
+    <string name="menulogoutText">Logout</string>
+    <string name="mainTextView">Enter your starting point and destination!</string>
+    <string name="title_activity_login">Login</string>
+    <string name="title_activity_register">Register</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="google_maps_key">AIzaSyBE1Dp9m13QUgkTNbbmBGDWoZPJEsSkVws</string>
+    <string name="title_activity_feedback">Feedback</string>
+    <string name="FeedbackText">Share your thoughts about this app!</string>
+</resources>
