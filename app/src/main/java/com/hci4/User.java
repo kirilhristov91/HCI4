@@ -7,11 +7,21 @@ public class User {
     private String username;
     private String password;
     int loggedIn;
+    int consumption;
 
-    public User(String username, String password){
+    public User(String username, String password, int consumption){
         this.username = username;
         this.password = password;
+        this.consumption = consumption;
         loggedIn = 0;
+    }
+
+    public void setConsumption(int consumption){
+        this.consumption = consumption;
+    }
+
+    public int getConsumption(){
+        return this.consumption;
     }
 
     public String getUsername() {

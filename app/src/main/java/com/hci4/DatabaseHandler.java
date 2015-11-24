@@ -11,7 +11,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 
     private static DatabaseHandler sInstance;
     //if updating the database change the version:
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     private static final String DATABASE_NAME = "Bike.db";
 
     //Lists table
@@ -19,6 +19,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     public static final String COLUMN_ID = "_id";
     public static final String COLUMN_USERNAME = "_name";
     public static final String COLUMN_PASSWORD = "_password";
+    public static final String COLUMN_CONSUMPTION = "_consumption";
     public static final String COLUMN_LOGGEDIN = "_loggedIn";
 
     /*
@@ -50,6 +51,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
                 COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COLUMN_USERNAME + " TEXT, " +
                 COLUMN_PASSWORD + " TEXT, " +
+                COLUMN_CONSUMPTION + " INTEGER " +
                 COLUMN_LOGGEDIN + " INTEGER " +
                 ");";
         db.execSQL(CreateUserTableQuery);
@@ -66,6 +68,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         ContentValues values = new ContentValues();
         values.put(COLUMN_USERNAME, user.getUsername());
         values.put(COLUMN_PASSWORD, user.getPassword());
+        values.put(COLUMN_CONSUMPTION, user.getConsumption());
         values.put(COLUMN_LOGGEDIN, user.getLoggedIn());
         SQLiteDatabase db = getWritableDatabase();
         db.insert(TABLE_USER, null, values);
@@ -91,8 +94,6 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 
     }
 
-
-
     public boolean authenticate(String username, String password){
         SQLiteDatabase db = getWritableDatabase();
         String query = "SELECT *" +
@@ -112,7 +113,8 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         SQLiteDatabase db = getWritableDatabase();
         Cursor c = db.rawQuery(query, null);
         c.moveToFirst();
-        s= c.getString(c.getColumnIndex(COLUMN_USERNAME)) + " " + c.getString(c.getColumnIndex(COLUMN_PASSWORD)) + " " + c.getInt(c.getColumnIndex(COLUMN_LOGGEDIN));
+        s= c.getString(c.getColumnIndex(COLUMN_USERNAME)) + " " + c.getString(c.getColumnIndex(COLUMN_PASSWORD)) +
+                c.getInt(c.getColumnIndex(COLUMN_CONSUMPTION)) + " " + c.getInt(c.getColumnIndex(COLUMN_LOGGEDIN));
         return s;
     }
 

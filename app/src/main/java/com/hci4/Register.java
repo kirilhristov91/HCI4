@@ -2,16 +2,11 @@ package com.hci4;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 
 public class Register extends AppCompatActivity implements View.OnClickListener{
@@ -19,8 +14,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
     EditText usernameRegister, passwordRegister;
     TextView loginLink;
     Button registerButton;
-    Spinner makeDropDown, modelDropDown;
-    private String makeDropDownChoice, modelDropDownChoice;
+    int consumption;
     DatabaseHandler dbHandler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,40 +29,19 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
         registerButton.setOnClickListener(this);
         loginLink = (TextView) findViewById(R.id.loginLink);
         loginLink.setOnClickListener(this);
-        makeDropDown = (Spinner) findViewById(R.id.makeDropDown);
-        modelDropDown = (Spinner) findViewById(R.id.modelDropDown);
+        NumberPicker consumptionPicker = (NumberPicker) findViewById(R.id.consumptionPicker);
 
-        String[] makes = new String[]{"Do not have car", "Audi", "Mercedes", };
-        ArrayAdapter<String> makeAdapter =
-                new ArrayAdapter<String>(Register.this, android.R.layout.simple_spinner_dropdown_item, makes);
-        makeDropDown.setAdapter(makeAdapter);
-        makeDropDown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                makeDropDownChoice = parent.getItemAtPosition(position).toString();
-            }
+        consumptionPicker.setMinValue(0);
+        consumptionPicker.setMaxValue(20);
+        consumptionPicker.setWrapSelectorWheel(false);
 
+        consumptionPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                makeDropDownChoice = "Do not have car";
+            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                consumption = newVal;
             }
         });
 
-        String[] models = new String[]{"None", "A320", "A6", "Mercedes", };
-        ArrayAdapter<String> modelAdapter =
-                new ArrayAdapter<String>(Register.this, android.R.layout.simple_spinner_dropdown_item, models);
-        modelDropDown.setAdapter(modelAdapter);
-        modelDropDown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                modelDropDownChoice = parent.getItemAtPosition(position).toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                modelDropDownChoice = "None";
-            }
-        });
     }
 
     @Override
@@ -79,7 +52,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
             case R.id.registerButton:
                 String username = usernameRegister.getText().toString();
                 String password = passwordRegister.getText().toString();
-                User newUser = new User(username, password);
+                User newUser = new User(username, password,consumption);
                 dbHandler.addUser(newUser);
                 startActivity(new Intent(this, Login.class));
                 break;
