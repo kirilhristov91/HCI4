@@ -21,6 +21,18 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     public static final String COLUMN_PASSWORD = "_password";
     public static final String COLUMN_LOGGEDIN = "_loggedIn";
 
+    /*
+    public static final String TABLE_HISTORY = "History";
+    public static final String COLUMN_HISTORY_ID = "_historyId";
+    public static final String COLUMN_USER_ID = "_userId";
+    public static final String COLUMN_HISTORY_FROM = "_from";
+    public static final String COLUMN_HISTORY_TO = "_to";
+    public static final String COLUMN_HISTORY_DATE = "_to";
+    public static final String COLUMN_HISTORY_DISTANCE = "_distance";
+    public static final String COLUMN_HISTORY_CHOICE = "_choice";
+    public static final String COLUMN_HISTORY_PRICE_CAR = "_priceCar";
+    public static final String COLUMN_HISTORY_PRICE_BIKE = "_priceBike";
+    */
     public static synchronized DatabaseHandler getInstance(Context context) {
         if (sInstance == null) {
             sInstance = new DatabaseHandler(context.getApplicationContext());
@@ -78,6 +90,8 @@ public class DatabaseHandler extends SQLiteOpenHelper{
                     " WHERE " + COLUMN_USERNAME + "=\"" + username + "\";");
 
     }
+
+
 
     public boolean authenticate(String username, String password){
         SQLiteDatabase db = getWritableDatabase();

@@ -1,5 +1,6 @@
 package com.hci4;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -69,24 +70,36 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void buttonClicked(View view){
-        String[] routes = new String[2];
-        routes[0] = placeA.getText().toString() + " - " + placeB.getText().toString();
-        routes[1] = placeA.getText().toString() + " - " + placeB.getText().toString();
+    public void buttonClicked(View view) {
+        if (placeA.getText().toString().equals("") || placeB.getText().toString().equals("")) {
+            showError();
+        } else {
+            String[] routes = new String[2];
+            routes[0] = placeA.getText().toString() + " - " + placeB.getText().toString();
+            routes[1] = placeA.getText().toString() + " - " + placeB.getText().toString();
 
-        ListAdapter routesAdapter = new CustomAdapter(this, routes);
-        listMain.setAdapter(routesAdapter);
-        listMain.setScrollContainer(false);
-        listMain.setOnItemClickListener(
-                new AdapterView.OnItemClickListener(){
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        String route = String.valueOf(parent.getItemAtPosition(position));
-                        Toast.makeText(MainActivity.this, route, Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(MainActivity.this, MapsActivity.class));
+            ListAdapter routesAdapter = new CustomAdapter(this, routes);
+            listMain.setAdapter(routesAdapter);
+            listMain.setScrollContainer(false);
+            listMain.setOnItemClickListener(
+                    new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            String route = String.valueOf(parent.getItemAtPosition(position));
+                            Toast.makeText(MainActivity.this, route, Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(MainActivity.this, MapsActivity.class));
+                        }
                     }
-                }
-        );
+            );
+
+        }
+    }
+
+    private void showError(){
+        AlertDialog.Builder allertBuilder = new AlertDialog.Builder(this);
+        allertBuilder.setMessage("Please enter Starting Point and Destination");
+        allertBuilder.setPositiveButton("OK", null);
+        allertBuilder.show();
     }
 
     @Override
