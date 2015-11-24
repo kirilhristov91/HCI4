@@ -52,7 +52,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
             case R.id.registerButton:
                 String username = usernameRegister.getText().toString();
                 String password = passwordRegister.getText().toString();
-                User newUser = new User(username, password,consumption);
+                User newUser = new User(username, password, consumption);
                 dbHandler.addUser(newUser);
                 startActivity(new Intent(this, Login.class));
                 break;

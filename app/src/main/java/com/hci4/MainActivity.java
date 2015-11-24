@@ -112,11 +112,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        /*if (!dbHandler.getIfLoggedIn(username)) {
+        if (!dbHandler.getIfLoggedIn(username)) {
             Intent intent = new Intent(MainActivity.this, Login.class);
             intent.putExtra("username", username);
             startActivity(intent);
-        }*/
+        }
 
     }
 

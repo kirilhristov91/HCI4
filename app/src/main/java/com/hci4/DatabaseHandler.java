@@ -11,7 +11,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 
     private static DatabaseHandler sInstance;
     //if updating the database change the version:
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 4;
     private static final String DATABASE_NAME = "Bike.db";
 
     //Lists table
@@ -20,7 +20,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     public static final String COLUMN_USERNAME = "_name";
     public static final String COLUMN_PASSWORD = "_password";
     public static final String COLUMN_CONSUMPTION = "_consumption";
-    public static final String COLUMN_LOGGEDIN = "_loggedIn";
+    public static final String COLUMN_LOGGED_IN = "_loggedIn";
 
     /*
     public static final String TABLE_HISTORY = "History";
@@ -51,8 +51,8 @@ public class DatabaseHandler extends SQLiteOpenHelper{
                 COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COLUMN_USERNAME + " TEXT, " +
                 COLUMN_PASSWORD + " TEXT, " +
+                COLUMN_LOGGED_IN + " INTEGER, " +
                 COLUMN_CONSUMPTION + " INTEGER " +
-                COLUMN_LOGGEDIN + " INTEGER " +
                 ");";
         db.execSQL(CreateUserTableQuery);
     }
@@ -68,8 +68,8 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         ContentValues values = new ContentValues();
         values.put(COLUMN_USERNAME, user.getUsername());
         values.put(COLUMN_PASSWORD, user.getPassword());
+        values.put(COLUMN_LOGGED_IN, user.getLoggedIn());
         values.put(COLUMN_CONSUMPTION, user.getConsumption());
-        values.put(COLUMN_LOGGEDIN, user.getLoggedIn());
         SQLiteDatabase db = getWritableDatabase();
         db.insert(TABLE_USER, null, values);
         db.close();
@@ -85,11 +85,11 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         SQLiteDatabase db = getWritableDatabase();
         if(loggedIn == 0)
             db.execSQL( "UPDATE " + TABLE_USER +
-                        " SET " + COLUMN_LOGGEDIN +"=" + 0  +
+                        " SET " + COLUMN_LOGGED_IN +"=" + 0  +
                         " WHERE " + COLUMN_USERNAME + "=\"" + username + "\";");
         else
             db.execSQL( "UPDATE " + TABLE_USER +
-                    " SET " + COLUMN_LOGGEDIN +"=" + 1 +
+                    " SET " + COLUMN_LOGGED_IN +"=" + 1 +
                     " WHERE " + COLUMN_USERNAME + "=\"" + username + "\";");
 
     }
@@ -113,8 +113,9 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         SQLiteDatabase db = getWritableDatabase();
         Cursor c = db.rawQuery(query, null);
         c.moveToFirst();
-        s= c.getString(c.getColumnIndex(COLUMN_USERNAME)) + " " + c.getString(c.getColumnIndex(COLUMN_PASSWORD)) +
-                c.getInt(c.getColumnIndex(COLUMN_CONSUMPTION)) + " " + c.getInt(c.getColumnIndex(COLUMN_LOGGEDIN));
+        if(c.isAfterLast()) return "Database is empty";
+        s= c.getString(c.getColumnIndex(COLUMN_USERNAME)) + " " + c.getString(c.getColumnIndex(COLUMN_PASSWORD)) + " " +
+                c.getInt(c.getColumnIndex(COLUMN_CONSUMPTION)) + " " + c.getInt(c.getColumnIndex(COLUMN_LOGGED_IN));
         return s;
     }
 
@@ -129,7 +130,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 
             c.moveToFirst();
             int l;
-            l = c.getInt(c.getColumnIndex(COLUMN_LOGGEDIN));
+            l = c.getInt(c.getColumnIndex(COLUMN_LOGGED_IN));
             c.close();
             db.close();
             if (l == 1) return true;
