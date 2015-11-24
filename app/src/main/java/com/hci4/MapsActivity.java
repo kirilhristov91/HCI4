@@ -2,6 +2,7 @@ package com.hci4;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.AsyncTask;
@@ -43,6 +44,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -64,6 +66,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         String route = makeURL(LOWER_MANHATTAN.latitude, LOWER_MANHATTAN.longitude, WALL_STREET.latitude, WALL_STREET.longitude);
         Log.i("URL_LINK za serveRA ", route);
         new connectAsyncTask(route).execute();
+        mMap.addMarker(new MarkerOptions().position(LOWER_MANHATTAN).title("manhanta"));
+        mMap.addMarker(new MarkerOptions().position(WALL_STREET).title("manhanta"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LOWER_MANHATTAN, 10));
+
+        mMap.setMyLocationEnabled(true);
+        Location myLoc = mMap.getMyLocation();
     }
 
 
@@ -98,10 +106,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        //LatLng glasgow = new LatLng(55.864237, -4.251806);
-        //mMap.addMarker(new MarkerOptions().position(glasgow).title("Marker in Glasgow"));
-        //mMap.moveCamera(CameraUpdateFactory.newLatLng(glasgow));
 
         mMap.setMyLocationEnabled(true);
         Location myLoc = mMap.getMyLocation();

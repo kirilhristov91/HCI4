@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <ImageView
-                android:src="@drawable/bike"
+                android:src="@drawable/bikelogo"
                 android:layout_width="match_parent"
                 android:layout_height="130dp" />
 
@@ -67,12 +67,12 @@
 
                 <ImageButton
                     android:id="@+id/mainButton"
-                    android:background="@drawable/mainbutton"
+                    android:background="@drawable/go"
                     android:layout_width="90dp"
                     android:layout_height="90dp"
                     android:layout_alignTop="@+id/placeA"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true" />
+                    android:layout_alignRight="@+id/mainTextView"
+                    android:layout_alignEnd="@+id/mainTextView" />
             </RelativeLayout>
 
             <RelativeLayout

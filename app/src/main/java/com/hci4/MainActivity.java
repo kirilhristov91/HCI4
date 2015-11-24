@@ -3,6 +3,7 @@ package com.hci4;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
@@ -87,7 +89,9 @@ public class MainActivity extends AppCompatActivity {
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             String route = String.valueOf(parent.getItemAtPosition(position));
                             Toast.makeText(MainActivity.this, route, Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(MainActivity.this, MapsActivity.class));
+                            Intent intent = new Intent(MainActivity.this, MapsActivity.class);
+                            intent.putExtra("username", username);
+                            startActivity(intent);
                         }
                     }
             );

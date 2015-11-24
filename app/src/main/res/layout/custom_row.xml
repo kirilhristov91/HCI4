@@ -15,11 +15,13 @@
         android:layout_marginRight="5dp"
         android:layout_marginLeft="5dp">
 
+
+
         <ImageView
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:id="@+id/imageViewRow"
-            android:src="@drawable/bike"
+            android:src="@drawable/bikelogo"
             android:layout_margin="5dp" />
 
         <TextView
