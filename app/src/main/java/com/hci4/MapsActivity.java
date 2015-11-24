@@ -48,8 +48,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private static final LatLng stand_Merchant_Square = new LatLng(55.858167, -4.245483);
     private static final LatLng stand_St_George_Cross = new LatLng(55.871367, -4.269117);
     private static final LatLng stand_St_Enoch_Square = new LatLng(55.85682862583277, -4.2552924156188965);
-    private static final LatLng stand_Glasgo_Cathedral = new LatLng(55.862883, -4.237467);
-    private static final LatLng standGlasgowGreen = new LatLng(55.84945, -4.23375);
+    private static final LatLng stand_Glasgow_Cathedral = new LatLng(55.862883, -4.237467);
+    private static final LatLng stand_Glasgow_Green = new LatLng(55.84945, -4.23375);
     private static final LatLng stand_Broomielaw = new LatLng(55.85665, -4.26375);
     private static final LatLng stand_SECC = new LatLng(55.85912884568613, -4.2867279052734375);
     private static final LatLng stand_Riverside_Museum = new LatLng(55.865683, -4.305367);
@@ -108,15 +108,54 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
+        mMap.addMarker(new MarkerOptions().position(stand_Central_Station).title("Central Station"));
+        mMap.addMarker(new MarkerOptions().position(stand_Waterloo_Street).title("Waterlo Street"));
+        mMap.addMarker(new MarkerOptions().position(stand_Queen_Street_Railway_Station).title("Queen Street Railway Station"));
+        mMap.addMarker(new MarkerOptions().position(stand_George_Square).title("George Square"));
+        mMap.addMarker(new MarkerOptions().position(stand_Merchant_Square).title("Merchant Square"));
+        mMap.addMarker(new MarkerOptions().position(stand_St_George_Cross).title("St George`s Cross"));
+        mMap.addMarker(new MarkerOptions().position(stand_St_Enoch_Square).title("St Enoch Square"));
+        mMap.addMarker(new MarkerOptions().position(stand_Glasgow_Cathedral).title("Glasgow Cathedral"));
+        mMap.addMarker(new MarkerOptions().position(stand_Glasgow_Green).title("Glasgow Green"));
+        mMap.addMarker(new MarkerOptions().position(stand_Broomielaw).title("Broomielaw"));
+        mMap.addMarker(new MarkerOptions().position(stand_SECC).title("S.E.C.C"));
+        mMap.addMarker(new MarkerOptions().position(stand_Riverside_Museum).title("Riverside Museum"));
+        mMap.addMarker(new MarkerOptions().position(stand_Butanic_Gardens).title("Butanic Gardens"));
+        mMap.addMarker(new MarkerOptions().position(stand_KelvinBridge_Subway).title("Kelvinbridge Subway"));
+        mMap.addMarker(new MarkerOptions().position(stand_Kelvingrove_Art_Gallery).title("Kelvingrove Art Gallery"));
+        mMap.addMarker(new MarkerOptions().position(stand_Charing_Cross_Railway_Station).title("Charing Cross Railway Station"));
+        mMap.addMarker(new MarkerOptions().position(stand_University_of_Glasgow_West).title("University of Glasgow (West)"));
+        mMap.addMarker(new MarkerOptions().position(stand_Mitchell_Library).title("Mitchell Library"));
+        mMap.addMarker(new MarkerOptions().position(stand_University_of_Strathclyde_North).title("University of Strathclyde (North)"));
+        mMap.addMarker(new MarkerOptions().position(stand_Bridge_Street_Subway).title("Bridge Street Subway"));
+        mMap.addMarker(new MarkerOptions().position(stand_Argyle_Street_Railway_Station).title("Argyle Street Railway Station"));
+        mMap.addMarker(new MarkerOptions().position(stand_Glasgow_Caledonian_University).title("Glasgow Caledonian University"));
+        mMap.addMarker(new MarkerOptions().position(stand_Emirates_Arena).title("Emirates Arena"));
+        mMap.addMarker(new MarkerOptions().position(stand_Gallery_of_Modern_Art).title("Gallery of Modern Art"));
+        mMap.addMarker(new MarkerOptions().position(stand_Trongate).title("Trongate"));
+        mMap.addMarker(new MarkerOptions().position(stand_University_of_Strathclyde_South).title("University of Strathclyde (South)"));
+        mMap.addMarker(new MarkerOptions().position(stand_University_of_Glasgow_East).title("University of Glasgow (East)"));
+        mMap.addMarker(new MarkerOptions().position(stand_Partick_Interchange).title("Partick Interchange"));
+        mMap.addMarker(new MarkerOptions().position(stand_Glasgow_Science_Centre).title("Glasgow Science Center"));
+        mMap.addMarker(new MarkerOptions().position(stand_Finnieston_Street).title("Finnieston Street"));
+        mMap.addMarker(new MarkerOptions().position(stand_Bellgrove_Railway_Station_North).title("Bellgrove Railway Station (North)"));
+        mMap.addMarker(new MarkerOptions().position(stand_Barrowlands).title("Barrowlands"));
+        mMap.addMarker(new MarkerOptions().position(stand_Bridgeton_Cross).title("Bridgeton Cross"));
+        mMap.addMarker(new MarkerOptions().position(stand_City_of_Glasgow_College_Riverside_Campus).title("City of Glasgow College (Riverside Campus)"));
+        mMap.addMarker(new MarkerOptions().position(stand_Paisley_Road_Toll).title("Paisley Road Toll"));
+        mMap.addMarker(new MarkerOptions().position(stand_Cessnock_Subway_Station).title("Cessnock Subway Station"));
+        mMap.addMarker(new MarkerOptions().position(stand_Govan_Cross).title("Govan Cross"));
+        mMap.addMarker(new MarkerOptions().position(stand_Eglinton_Toll).title("Eglinton Toll"));
+        mMap.addMarker(new MarkerOptions().position(stand_Queens_Park_Railway_Station).title("Queens Park Railway Station"));
+        mMap.addMarker(new MarkerOptions().position(stand_Queens_Park_West).title("Queens Park West"));
+        mMap.addMarker(new MarkerOptions().position(stand_Buchanan_Street_Bus_Station).title("Buchanan Street Bus Station"));
+
         String route = makeURL(UNI.latitude, UNI.longitude, Home.latitude,Home.longitude);
         Log.i("URL_LINK za serveRA ", route);
         new connectAsyncTask(route).execute();
         mMap.addMarker(new MarkerOptions().position(UNI).title("Uni"));
         mMap.addMarker(new MarkerOptions().position(Home).title("Home"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(UNI, 10));
-
-
-
 
         mMap.setMyLocationEnabled(true);
         Location myLoc = mMap.getMyLocation();
