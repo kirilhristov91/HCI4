@@ -6,6 +6,7 @@ import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.AsyncTask;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -40,6 +41,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private static final LatLng BROOKLYN_BRIDGE = new LatLng(40.7057, -73.9964);
     private static final LatLng WALL_STREET = new LatLng(40.7064, -74.0094);
 
+    private static final LatLng UNI = new LatLng(55.8719, -4.2875);
+    private static final LatLng Home = new LatLng(55.8691926, -4.2761092);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +57,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
 
-        mapsButton = (Button) findViewById(R.id.mapsButton);
+
+        FloatingActionButton mapsButton = (FloatingActionButton) findViewById(R.id.mapsButton);
         mapsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,12 +68,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
-        String route = makeURL(LOWER_MANHATTAN.latitude, LOWER_MANHATTAN.longitude, WALL_STREET.latitude, WALL_STREET.longitude);
+        String route = makeURL(UNI.latitude, UNI.longitude, Home.latitude,Home.longitude);
         Log.i("URL_LINK za serveRA ", route);
         new connectAsyncTask(route).execute();
-        mMap.addMarker(new MarkerOptions().position(LOWER_MANHATTAN).title("manhanta"));
-        mMap.addMarker(new MarkerOptions().position(WALL_STREET).title("manhanta"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LOWER_MANHATTAN, 10));
+        mMap.addMarker(new MarkerOptions().position(UNI).title("manhanta"));
+        mMap.addMarker(new MarkerOptions().position(Home).title("manhanta"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(UNI, 10));
 
         mMap.setMyLocationEnabled(true);
         Location myLoc = mMap.getMyLocation();
