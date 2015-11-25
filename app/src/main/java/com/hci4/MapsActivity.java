@@ -175,7 +175,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         String route = makeURL(BoydOrr, stand_University_of_Glasgow_West, "walking");
         new connectAsyncTask(route, Color.GREEN).execute();
 
-
         String route2 = makeURL(stand_University_of_Glasgow_West, GibsonTrafficLight, "bicycling");
         new connectAsyncTask(route2, Color.BLUE).execute();
 
@@ -220,20 +219,72 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             @Override
             public void onMyLocationChange(Location location) {
-                LatLng myLoc= new LatLng(location.getLatitude(), location.getLongitude());
-                Vibrator v = (Vibrator) MapsActivity.this.getSystemService(Context.VIBRATOR_SERVICE);
 
-                if(myLoc.equals(WolfsonTurn) || myLoc.equals(chilis) || myLoc.equals(kraqnastylbite) || myLoc.equals(GibsonTrafficLight)){
+                Vibrator v = (Vibrator) MapsActivity.this.getSystemService(Context.VIBRATOR_SERVICE);
+                Location u = new Location("");
+
+                u.setLatitude(WolfsonTurn.latitude);
+                u.setLongitude(WolfsonTurn.longitude);
+                float distance = u.distanceTo(location);
+                if(distance < 10){
                     v.vibrate(500);
                 }
 
-                if(myLoc.equals(uObraznoto) || myLoc.equals(sancho) || myLoc.equals(nakraq)){
+                u.setLatitude(chilis.latitude);
+                u.setLongitude(chilis.longitude);
+                float distance2 = u.distanceTo(location);
+                if(distance2 < 10){
+                    v.vibrate(3000);
+                }
+                u.setLatitude(kraqnastylbite.latitude);
+                u.setLongitude(kraqnastylbite.longitude);
+                float distance3 = u.distanceTo(location);
+                if(distance3 < 10){
+                    v.vibrate(3000);
+                }
+                u.setLatitude(GibsonTrafficLight.latitude);
+                u.setLongitude(GibsonTrafficLight.longitude);
+                float distance4 = u.distanceTo(location);
+                if(distance4 < 10){
                     v.vibrate(1000);
                 }
-
-                if(myLoc.equals(stand_University_of_Glasgow_West)|| myLoc.equals(stand_University_of_Glasgow_East) || myLoc.equals(Home)){
+                u.setLatitude(uObraznoto.latitude);
+                u.setLongitude(uObraznoto.longitude);
+                float distance5 = u.distanceTo(location);
+                if(distance5 < 10){
+                    v.vibrate(1000);
+                }
+                u.setLatitude(sancho.latitude);
+                u.setLongitude(sancho.longitude);
+                float distance6 = u.distanceTo(location);
+                if(distance6 < 10){
+                    v.vibrate(1000);
+                }
+                u.setLatitude(nakraq.latitude);
+                u.setLongitude(nakraq.longitude);
+                float distance7 = u.distanceTo(location);
+                if(distance7 < 10){
+                    v.vibrate(1000);
+                }
+                u.setLatitude(stand_University_of_Glasgow_West.latitude);
+                u.setLongitude(stand_University_of_Glasgow_West.longitude);
+                float distance8 = u.distanceTo(location);
+                if(distance8 < 10){
                     v.vibrate(2000);
                 }
+                u.setLatitude(stand_University_of_Glasgow_East.latitude);
+                u.setLongitude(stand_University_of_Glasgow_East.longitude);
+                float distance9 = u.distanceTo(location);
+                if(distance9 < 10){
+                    v.vibrate(2000);
+                } u.setLatitude(Home.latitude);
+                u.setLongitude(Home.longitude);
+                float distance10 = u.distanceTo(location);
+                if(distance10 < 10){
+                    v.vibrate(2000);
+                }
+
+
 
             }
         };
