@@ -43,6 +43,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     // hardcoded points for directions
     private static final LatLng UNI = new LatLng(55.8719, -4.2875);
     private static final LatLng Home = new LatLng(55.8691926, -4.2761092);
+    private static final LatLng BoydOrr = new LatLng(55.873083, -4.29257);
+    private static final LatLng uObraznoto = new LatLng(55.872072, -4.285782);
+    private static final LatLng GibsonTrafficLight = new LatLng(55.872806, -4.284307);
 
     // nextbike stands
     private static final LatLng stand_Central_Station = new LatLng(55.86078768935794, -4.258602261543274);
@@ -154,12 +157,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addMarker(new MarkerOptions().position(stand_Queens_Park_West).title("Queens Park West").icon(BitmapDescriptorFactory.fromResource(R.drawable.nextbikemarker)));
         mMap.addMarker(new MarkerOptions().position(stand_Buchanan_Street_Bus_Station).title("Buchanan Street Bus Station").icon(BitmapDescriptorFactory.fromResource(R.drawable.nextbikemarker)));
 
-        String route = makeURL(UNI.latitude, UNI.longitude, Home.latitude,Home.longitude);
-        Log.i("URL_LINK za serveRA ", route);
-        new connectAsyncTask(route).execute();
-        mMap.addMarker(new MarkerOptions().position(UNI).title("Uni"));
+        // ot boyd orr do kolelata
+        String route = makeURL(BoydOrr, stand_University_of_Glasgow_West, "walking");
+        new connectAsyncTask(route, Color.GREEN).execute();
+
+
+        String route2 = makeURL(stand_University_of_Glasgow_West, GibsonTrafficLight, "bicycling");
+        new connectAsyncTask(route2, Color.BLUE).execute();
+
+        String route3 = makeURL(GibsonTrafficLight, stand_University_of_Glasgow_East, "bicycling");
+        new connectAsyncTask(route3, Color.BLUE).execute();
+
+        String route4 = makeURL(stand_University_of_Glasgow_East, Home, "walking");
+        new connectAsyncTask(route4, Color.GREEN).execute();
+
+
+        mMap.addMarker(new MarkerOptions().position(BoydOrr).title("BoydOrr"));
         mMap.addMarker(new MarkerOptions().position(Home).title("Home"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(UNI, 17));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(UNI, 13));
 
         mMap.setMyLocationEnabled(true);
         Location myLocation = mMap.getMyLocation();
@@ -173,29 +188,28 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         return new GoogleMap.OnMyLocationChangeListener() {
             @Override
             public void onMyLocationChange(Location location) {
-                System.out.println("MITKO: Location changed");
-                System.out.println("MITKO: lat = " + location.getLatitude());
-                System.out.println("MITKO: lng = " + location.getLongitude());
-                System.out.println("MITKO:====================");
+
+                //if(location.getLatitude() == )
+
             }
         };
     }
 
 
-    public String makeURL (double sourcelat, double sourcelog, double destlat, double destlog ){
+    public String makeURL (LatLng source, LatLng dest,String mode){
         StringBuilder urlString = new StringBuilder();
         urlString.append("https://maps.googleapis.com/maps/api/directions/json");
         urlString.append("?origin=");// from
-        urlString.append(Double.toString(sourcelat));
+        urlString.append(Double.toString(source.latitude));
         urlString.append(",");
         urlString
-                .append(Double.toString(sourcelog));
+                .append(Double.toString(source.longitude));
         urlString.append("&destination=");// to
         urlString
-                .append(Double.toString( destlat));
+                .append(Double.toString(dest.latitude));
         urlString.append(",");
-        urlString.append(Double.toString( destlog));
-        urlString.append("&sensor=false&mode=driving&alternatives=true");
+        urlString.append(Double.toString(dest.longitude));
+        urlString.append("&sensor=false&mode="+mode+"&alternatives=false");
         urlString.append("&key=AIzaSyB1ObQ929yZ9Jzjklt0r5H9JTFNuOFj630");
         return urlString.toString();
     }
@@ -216,7 +230,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
-    public void drawPath(String result) {
+    public void drawPath(String result, int c) {
 
         try {
             //Transform the string into a json object
@@ -229,7 +243,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             Polyline line = mMap.addPolyline(new PolylineOptions()
                             .addAll(list)
                             .width(12)
-                            .color(Color.parseColor("#05b1fb"))//Google maps blue color
+                            .color(c)//Google maps blue color
                             .geodesic(true)
             );
            /*
@@ -286,8 +300,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private class connectAsyncTask extends AsyncTask<Void, Void, String> {
         private ProgressDialog progressDialog;
         String url;
-        connectAsyncTask(String urlPass){
+        int c;
+        connectAsyncTask(String urlPass, int c){
             url = urlPass;
+            this.c = c;
         }
         @Override
         protected void onPreExecute() {
@@ -309,9 +325,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             super.onPostExecute(result);
             progressDialog.hide();
             if(result!=null){
-                //System.out.println(result);
+                System.out.println(result);
 
-                drawPath(result);
+                drawPath(result, c);
 
             }
         }
