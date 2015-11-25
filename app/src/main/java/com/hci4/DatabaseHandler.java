@@ -213,7 +213,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
             c.moveToFirst();
             if(c.isAfterLast()) return -1;
 
-            id = c.getInt(c.getColumnIndex(COLUMN_USER_ID));
+            id = c.getInt(c.getColumnIndex(COLUMN_ID));
         }
         c.close();
         db.close();

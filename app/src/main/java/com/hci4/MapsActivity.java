@@ -212,22 +212,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-
-
-
     }
 
 
     public void drawPath(String result) {
-        /*
-        mMap.setMyLocationEnabled(true);
-        Location myLoc = mMap.getMyLocation();
-        System.out.println("//////////////////////////////////////////////");
-        System.out.println("\n");
-        System.out.println("MY LOCATION IS :" + myLoc.getLatitude() + " " + myLoc.getLongitude());
-        System.out.println("\n");
-        System.out.println("//////////////////////////////////////////////");
-        */
+
         try {
             //Transform the string into a json object
             final JSONObject json = new JSONObject(result);

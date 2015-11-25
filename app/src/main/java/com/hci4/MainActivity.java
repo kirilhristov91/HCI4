@@ -20,6 +20,11 @@ import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+
 public class MainActivity extends AppCompatActivity {
 
     DatabaseHandler dbHandler;
@@ -54,16 +59,25 @@ public class MainActivity extends AppCompatActivity {
 
         historyList = (NonScrollListView) findViewById(R.id.historyList);
 
-        String[] history = {"history item1", "history item2", "history item3","history item4" };
+        int id = dbHandler.getUserId(username);
+        ArrayList<History> historyItems = dbHandler.getHistory(id);
+
+
+        String[] routes = new String[historyItems.size()];
+
+        for (int i = 0; i < historyItems.size(); i++) {
+            routes[i] = historyItems.get(i).getFrom() + " - " + historyItems.get(i).getDestination();
+        }
+
         ArrayAdapter<String> historyAdapter =
-                new CustomAdapter(this, history);
+                new CustomAdapter(this, routes);
         historyList.setAdapter(historyAdapter);
         historyList.setScrollContainer(false);
 
         mainButton.setOnClickListener(
-                new View.OnClickListener(){
-                    public void onClick(View v){
-                        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                new View.OnClickListener() {
+                    public void onClick(View v) {
+                        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                         imm.hideSoftInputFromWindow(mainLayout.getWindowToken(), 0);
                         buttonClicked(v);
                     }
@@ -87,8 +101,15 @@ public class MainActivity extends AppCompatActivity {
                     new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            String route = String.valueOf(parent.getItemAtPosition(position));
-                            Toast.makeText(MainActivity.this, route, Toast.LENGTH_SHORT).show();
+                            String choice;
+                            if(position == 0) choice = "car";
+                            else choice = "bike";
+                            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                            Date date = new Date();
+                            System.out.println(username);
+                            History h = new History(dbHandler.getUserId(username), placeA.getText().toString(),
+                                                    placeB.getText().toString(), dateFormat.format(date).toString(), choice);
+                            dbHandler.addToHistory(h);
                             Intent intent = new Intent(MainActivity.this, MapsActivity.class);
                             intent.putExtra("username", username);
                             startActivity(intent);
