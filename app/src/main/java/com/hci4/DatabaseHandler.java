@@ -138,13 +138,13 @@ public class DatabaseHandler extends SQLiteOpenHelper{
                 from = c.getString(c.getColumnIndex("_from"));
             }
             if(c.getString(c.getColumnIndex("_to")) != null){
-                from = c.getString(c.getColumnIndex("_to"));
+                to = c.getString(c.getColumnIndex("_to"));
             }
             if(c.getString(c.getColumnIndex("_date")) != null){
-                from = c.getString(c.getColumnIndex("_date"));
+                date = c.getString(c.getColumnIndex("_date"));
             }
             if(c.getString(c.getColumnIndex("_choice")) != null){
-                from = c.getString(c.getColumnIndex("_choice"));
+                choice = c.getString(c.getColumnIndex("_choice"));
             }
 
             History historyItem = new History(userId, from, to, date, choice);
