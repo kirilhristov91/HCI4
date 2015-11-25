@@ -9,6 +9,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
+import android.os.Vibrator;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -41,11 +42,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private String username;
 
     // hardcoded points for directions
+    ///////////////////////////////////////////////////////////////////////////////////////////
+    // route 1
+
     private static final LatLng UNI = new LatLng(55.8719, -4.2875);
     private static final LatLng Home = new LatLng(55.8691926, -4.2761092);
     private static final LatLng BoydOrr = new LatLng(55.873083, -4.29257);
-    private static final LatLng uObraznoto = new LatLng(55.872072, -4.285782);
     private static final LatLng GibsonTrafficLight = new LatLng(55.872806, -4.284307);
+    // route 1 manouver points
+    private static final LatLng WolfsonTurn = new LatLng(55.872933, -4.2924772); //right
+    private static final LatLng uObraznoto = new LatLng(55.8720959, -4.285546399999999); //left
+    // sloji i gibson kato manevra - left
+    private static final LatLng roundAbout = new LatLng(55.8718811, -4.2782199); //nqma da go praim
+    private static final LatLng chilis = new LatLng(558700316, -4.275615000000001); // right
+    private static final LatLng sancho = new LatLng(55.86999179999999, -4.2758671); //left
+    private static final LatLng kraqnastylbite = new LatLng(55.86977129, -4.2761828); // right
+    private static final LatLng nakraq = new LatLng(55.869697, -4.2765961);//left
+
+    //////////////////////////////////////////////////////////////////////////////////////////
 
     // nextbike stands
     private static final LatLng stand_Central_Station = new LatLng(55.86078768935794, -4.258602261543274);
@@ -184,17 +198,46 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
+    /*
+    *  // route 1
+
+    private static final LatLng UNI = new LatLng(55.8719, -4.2875);
+    private static final LatLng Home = new LatLng(55.8691926, -4.2761092);
+    private static final LatLng BoydOrr = new LatLng(55.873083, -4.29257);
+    private static final LatLng GibsonTrafficLight = new LatLng(55.872806, -4.284307);
+    // route 1 manouver points
+    private static final LatLng WolfsonTurn = new LatLng(55.872933, -4.2924772); //right
+    private static final LatLng uObraznoto = new LatLng(55.8720959, -4.285546399999999); //left
+    // sloji i gibson kato manevra - left
+    private static final LatLng roundAbout = new LatLng(55.8718811, -4.2782199); //nqma da go praim
+    private static final LatLng chilis = new LatLng(558700316, -4.275615000000001); // right
+    private static final LatLng sancho = new LatLng(55.86999179999999, -4.2758671); //left
+    private static final LatLng kraqnastylbite = new LatLng(55.86977129, -4.2761828); // right
+    private static final LatLng nakraq = new LatLng(55.869697, -4.2765961);//left*/
+
     private GoogleMap.OnMyLocationChangeListener myLocationChanged(){
         return new GoogleMap.OnMyLocationChangeListener() {
+
             @Override
             public void onMyLocationChange(Location location) {
+                LatLng myLoc= new LatLng(location.getLatitude(), location.getLongitude());
+                Vibrator v = (Vibrator) MapsActivity.this.getSystemService(Context.VIBRATOR_SERVICE);
 
-                //if(location.getLatitude() == )
+                if(myLoc.equals(WolfsonTurn) || myLoc.equals(chilis) || myLoc.equals(kraqnastylbite) || myLoc.equals(GibsonTrafficLight)){
+                    v.vibrate(500);
+                }
+
+                if(myLoc.equals(uObraznoto) || myLoc.equals(sancho) || myLoc.equals(nakraq)){
+                    v.vibrate(1000);
+                }
+
+                if(myLoc.equals(stand_University_of_Glasgow_West)|| myLoc.equals(stand_University_of_Glasgow_East) || myLoc.equals(Home)){
+                    v.vibrate(2000);
+                }
 
             }
         };
     }
-
 
     public String makeURL (LatLng source, LatLng dest,String mode){
         StringBuilder urlString = new StringBuilder();
@@ -229,7 +272,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
-
     public void drawPath(String result, int c) {
 
         try {
@@ -261,7 +303,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         }
     }
-
 
     private List<LatLng> decodePoly(String encoded) {
 
@@ -332,7 +373,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         }
     }
-
 
     public void onLocationChanged(Location location) {
         mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(location.getLatitude(), location.getLongitude())));
