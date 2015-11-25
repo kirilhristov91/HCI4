@@ -66,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
         String[] routes = new String[historyItems.size()];
 
         for (int i = 0; i < historyItems.size(); i++) {
+            System.out.println("///////////////////////////");
+            System.out.println(historyItems.get(i).getFrom() + " " + historyItems.get(i).getDestination());
             routes[i] = historyItems.get(i).getFrom() + " - " + historyItems.get(i).getDestination();
         }
 

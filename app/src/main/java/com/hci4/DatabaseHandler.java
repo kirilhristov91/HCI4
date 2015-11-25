@@ -95,7 +95,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         values.put(COLUMN_HISTORY_DATE, h.getDate());
         values.put(COLUMN_HISTORY_CHOICE, h.getChoice());
         SQLiteDatabase db = getWritableDatabase();
-        db.insert(TABLE_USER, null, values);
+        db.insert(TABLE_HISTORY, null, values);
         db.close();
     }
 
