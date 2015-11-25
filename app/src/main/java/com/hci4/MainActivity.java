@@ -69,12 +69,12 @@ public class MainActivity extends AppCompatActivity {
             //System.out.println(historyItems.get(i).getFrom() + " " + historyItems.get(i).getDestination());
             routes[i] = historyItems.get(i).getFrom() + " - " + historyItems.get(i).getDestination();
         }
-
-        ArrayAdapter<String> historyAdapter =
-                new CustomHistoryAdapter(this, routes);
+        /*
+        ArrayAdapter<History> historyAdapter =
+                new CustomHistoryAdapter(this, historyItems);
         historyList.setAdapter(historyAdapter);
         historyList.setScrollContainer(false);
-
+        */
         mainButton.setOnClickListener(
                 new View.OnClickListener() {
                     public void onClick(View v) {
