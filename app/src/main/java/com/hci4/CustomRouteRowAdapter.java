@@ -25,13 +25,11 @@ public class CustomRouteRowAdapter extends ArrayAdapter<String>{
         TextView textView6 = (TextView) customView.findViewById(R.id.textView6);
         ImageView imageViewRouteRow = (ImageView) customView.findViewById(R.id.imageViewRouteRow);
 
-        //System.out.println(singleRouteItem);
-
         String[] parts = singleRouteItem.split(" ",2);
 
         textView2.setText(parts[0]);
         textView4.setText(parts[1]);
-        System.out.println(parts[0] + " " + parts[1]);
+
         if (position == 0) {
             imageViewRouteRow.setImageResource(R.drawable.car);
 
@@ -41,8 +39,8 @@ public class CustomRouteRowAdapter extends ArrayAdapter<String>{
         }
         else {
             imageViewRouteRow.setImageResource(R.drawable.bike);
-            double cost = Math.random()*5;
-            String text = String.format("%.2f", cost)+"£";
+            int cost = (int)(Math.random()*3);
+            String text = cost+"£";
             textView6.setText(text);
         }
         return customView;

@@ -8,9 +8,9 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.ImageView;
 
-class CustomAdapter extends ArrayAdapter<String> {
+class CustomHistoryAdapter extends ArrayAdapter<String> {
 
-    public CustomAdapter(Context context, String[] routes) {
+    public CustomHistoryAdapter(Context context, String[] routes) {
         super(context, R.layout.custom_row, routes);
     }
 

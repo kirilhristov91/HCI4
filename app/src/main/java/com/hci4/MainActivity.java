@@ -18,7 +18,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
-import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -72,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         ArrayAdapter<String> historyAdapter =
-                new CustomAdapter(this, routes);
+                new CustomHistoryAdapter(this, routes);
         historyList.setAdapter(historyAdapter);
         historyList.setScrollContainer(false);
 
