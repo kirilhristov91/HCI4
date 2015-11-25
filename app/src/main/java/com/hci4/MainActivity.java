@@ -66,8 +66,8 @@ public class MainActivity extends AppCompatActivity {
         String[] routes = new String[historyItems.size()];
 
         for (int i = 0; i < historyItems.size(); i++) {
-            System.out.println("///////////////////////////");
-            System.out.println(historyItems.get(i).getFrom() + " " + historyItems.get(i).getDestination());
+            //System.out.println("///////////////////////////");
+            //System.out.println(historyItems.get(i).getFrom() + " " + historyItems.get(i).getDestination());
             routes[i] = historyItems.get(i).getFrom() + " - " + historyItems.get(i).getDestination();
         }
 
@@ -93,10 +93,10 @@ public class MainActivity extends AppCompatActivity {
             showError();
         } else {
             String[] routes = new String[2];
-            routes[0] = placeA.getText().toString() + " - " + placeB.getText().toString();
-            routes[1] = placeA.getText().toString() + " - " + placeB.getText().toString();
-
-            ListAdapter routesAdapter = new CustomAdapter(this, routes);
+            routes[0] = placeA.getText().toString() + " " + placeB.getText().toString();
+            routes[1] = placeA.getText().toString() + " " + placeB.getText().toString();
+            //System.out.println(placeA.getText().toString() + " - " + placeB.getText().toString());
+            ListAdapter routesAdapter = new CustomRouteRowAdapter(this, routes);
             listMain.setAdapter(routesAdapter);
             listMain.setScrollContainer(false);
             listMain.setOnItemClickListener(
