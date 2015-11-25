@@ -1,10 +1,13 @@
 package com.hci4;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentActivity;
@@ -155,10 +158,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         new connectAsyncTask(route).execute();
         mMap.addMarker(new MarkerOptions().position(UNI).title("Uni"));
         mMap.addMarker(new MarkerOptions().position(Home).title("Home"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(UNI, 10));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(UNI, 17));
 
         mMap.setMyLocationEnabled(true);
-        Location myLoc = mMap.getMyLocation();
+        Location myLocation = mMap.getMyLocation();
+
+
     }
 
 
@@ -194,15 +199,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
 
-        mMap.setMyLocationEnabled(true);
-        Location myLoc = mMap.getMyLocation();
-        //onLocationChanged(myLoc);
+
 
     }
 
 
     public void drawPath(String result) {
-
+        /*
+        mMap.setMyLocationEnabled(true);
+        Location myLoc = mMap.getMyLocation();
+        System.out.println("//////////////////////////////////////////////");
+        System.out.println("\n");
+        System.out.println("MY LOCATION IS :" + myLoc.getLatitude() + " " + myLoc.getLongitude());
+        System.out.println("\n");
+        System.out.println("//////////////////////////////////////////////");
+        */
         try {
             //Transform the string into a json object
             final JSONObject json = new JSONObject(result);
@@ -297,6 +308,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 //System.out.println(result);
 
                 drawPath(result);
+
             }
         }
     }
@@ -305,6 +317,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onLocationChanged(Location location) {
         mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(location.getLatitude(), location.getLongitude())));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+
+        //onLocationChanged(myLoc);
+
     }
 
 
