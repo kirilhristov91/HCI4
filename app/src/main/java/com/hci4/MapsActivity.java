@@ -163,7 +163,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setMyLocationEnabled(true);
         Location myLocation = mMap.getMyLocation();
 
+        mMap.setOnMyLocationChangeListener(myLocationChanged());
 
+
+    }
+
+    private GoogleMap.OnMyLocationChangeListener myLocationChanged(){
+        return new GoogleMap.OnMyLocationChangeListener() {
+            @Override
+            public void onMyLocationChange(Location location) {
+                System.out.println("MITKO: Location changed");
+                System.out.println("MITKO: lat = " + location.getLatitude());
+                System.out.println("MITKO: lng = " + location.getLongitude());
+                System.out.println("MITKO:====================");
+            }
+        };
     }
 
 
