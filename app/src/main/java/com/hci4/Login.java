@@ -34,7 +34,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         loginButton.setOnClickListener(this);
         registerLink = (TextView) findViewById(R.id.registerLink);
         registerLink.setOnClickListener(this);
-        //registerLink.setText(dbHandler.printDatabase());
+        registerLink.setText(dbHandler.printDatabase());
     }
 
     @Override

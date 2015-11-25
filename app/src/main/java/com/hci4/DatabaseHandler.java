@@ -11,7 +11,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 
     private static DatabaseHandler sInstance;
     //if updating the database change the version:
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 5;
     private static final String DATABASE_NAME = "Bike.db";
 
     //Lists table
@@ -22,18 +22,15 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     public static final String COLUMN_CONSUMPTION = "_consumption";
     public static final String COLUMN_LOGGED_IN = "_loggedIn";
 
-    /*
+
     public static final String TABLE_HISTORY = "History";
     public static final String COLUMN_HISTORY_ID = "_historyId";
     public static final String COLUMN_USER_ID = "_userId";
     public static final String COLUMN_HISTORY_FROM = "_from";
     public static final String COLUMN_HISTORY_TO = "_to";
-    public static final String COLUMN_HISTORY_DATE = "_to";
-    public static final String COLUMN_HISTORY_DISTANCE = "_distance";
+    public static final String COLUMN_HISTORY_DATE = "_date";
     public static final String COLUMN_HISTORY_CHOICE = "_choice";
-    public static final String COLUMN_HISTORY_PRICE_CAR = "_priceCar";
-    public static final String COLUMN_HISTORY_PRICE_BIKE = "_priceBike";
-    */
+
     public static synchronized DatabaseHandler getInstance(Context context) {
         if (sInstance == null) {
             sInstance = new DatabaseHandler(context.getApplicationContext());
@@ -54,12 +51,27 @@ public class DatabaseHandler extends SQLiteOpenHelper{
                 COLUMN_LOGGED_IN + " INTEGER, " +
                 COLUMN_CONSUMPTION + " INTEGER " +
                 ");";
+
+        String CreateHistoryTableQuery = "CREATE TABLE " + TABLE_HISTORY + "(" +
+                COLUMN_HISTORY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_USER_ID + " INTEGER, " +
+                COLUMN_HISTORY_FROM + " TEXT, " +
+                COLUMN_HISTORY_TO + " TEXT, " +
+                COLUMN_HISTORY_DATE + " TEXT, " +
+                COLUMN_HISTORY_CHOICE + " TEXT, " +
+                "FOREIGN KEY (" + COLUMN_USER_ID + ") REFERENCES " +
+                TABLE_USER + "(" + COLUMN_ID + ")"+
+                ");";
+
+
         db.execSQL(CreateUserTableQuery);
+        db.execSQL(CreateHistoryTableQuery);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USER);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_HISTORY);
         onCreate(db);
     }
 
@@ -73,6 +85,77 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         SQLiteDatabase db = getWritableDatabase();
         db.insert(TABLE_USER, null, values);
         db.close();
+    }
+
+    public void addToHistory(History h){
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_USER_ID, h.getUserId());
+        values.put(COLUMN_HISTORY_FROM, h.getFrom());
+        values.put(COLUMN_HISTORY_TO, h.getDestination());
+        values.put(COLUMN_HISTORY_DATE, h.getDate());
+        values.put(COLUMN_HISTORY_CHOICE, h.getChoice());
+        SQLiteDatabase db = getWritableDatabase();
+        db.insert(TABLE_USER, null, values);
+        db.close();
+    }
+
+    public int historyEmpty(int idofuser){
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_HISTORY +
+                " WHERE _userId = " + idofuser;
+        // cursor points to a location in the results
+        Cursor c = db.rawQuery(query, null);
+        // move to the first row
+        c.moveToFirst();
+        if(c.isAfterLast()) return 0;
+        else return 1;
+    }
+
+    public ArrayList<History> getHistory(int idofuser){
+        // prepare the variables to store a row
+        int historyId;
+        int userId;
+        String from = "";
+        String to = "";
+        String date = "";
+        String choice ="";
+
+        ArrayList<History> historyList = new ArrayList<History>();
+
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_HISTORY +
+                " WHERE _userId = " + idofuser;
+        // cursor points to a location in the results
+        Cursor c = db.rawQuery(query, null);
+        // move to the first row
+        c.moveToFirst();
+
+        while (!c.isAfterLast()){
+
+            historyId = c.getInt(c.getColumnIndex("_historyId"));
+            userId = c.getInt(c.getColumnIndex("_userId"));
+            if(c.getString(c.getColumnIndex("_from")) != null){
+                from = c.getString(c.getColumnIndex("_from"));
+            }
+            if(c.getString(c.getColumnIndex("_to")) != null){
+                from = c.getString(c.getColumnIndex("_to"));
+            }
+            if(c.getString(c.getColumnIndex("_date")) != null){
+                from = c.getString(c.getColumnIndex("_date"));
+            }
+            if(c.getString(c.getColumnIndex("_choice")) != null){
+                from = c.getString(c.getColumnIndex("_choice"));
+            }
+
+            History historyItem = new History(userId, from, to, date, choice);
+            historyItem.setHistoryId(historyId);
+
+            historyList.add(historyItem);
+            c.moveToNext();
+        }
+        c.close();
+        db.close();
+        return historyList;
     }
 
     // delete user
@@ -117,6 +200,24 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         s= c.getString(c.getColumnIndex(COLUMN_USERNAME)) + " " + c.getString(c.getColumnIndex(COLUMN_PASSWORD)) + " " +
                 c.getInt(c.getColumnIndex(COLUMN_CONSUMPTION)) + " " + c.getInt(c.getColumnIndex(COLUMN_LOGGED_IN));
         return s;
+    }
+
+    public int getUserId(String username){
+        int id = 0;
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT *" +
+                " FROM " + TABLE_USER +
+                " WHERE " + COLUMN_USERNAME + "=\"" + username + "\";";
+        Cursor c = db.rawQuery(query, null);
+        if(c.getCount()>0) {
+            c.moveToFirst();
+            if(c.isAfterLast()) return -1;
+
+            id = c.getInt(c.getColumnIndex(COLUMN_USER_ID));
+        }
+        c.close();
+        db.close();
+        return id;
     }
 
     public boolean getIfLoggedIn(String username){

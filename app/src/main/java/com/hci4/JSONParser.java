@@ -48,7 +48,6 @@ public class JSONParser {
         } catch (Exception e) {
             Log.e("Buffer Error", "Error converting result " + e.toString());
         }
-        Log.i("JSONCHETO", json);
         return json;
 
     }

@@ -88,7 +88,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:dividerHeight="5dp"
-                    android:divider="#50FFFFFF">
+                    android:divider="@color/colorBackground">
                 </com.hci4.NonScrollListView>
 
             </RelativeLayout>
@@ -127,7 +127,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:dividerHeight="5dp"
-                    android:divider="#80FFFFFF"
+                    android:divider="@color/colorBackground"
                     >
                 </com.hci4.NonScrollListView>
 

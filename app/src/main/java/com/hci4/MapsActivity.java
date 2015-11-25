@@ -294,6 +294,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             super.onPostExecute(result);
             progressDialog.hide();
             if(result!=null){
+                //System.out.println(result);
+
                 drawPath(result);
             }
         }
