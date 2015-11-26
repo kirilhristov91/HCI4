@@ -1,6 +1,5 @@
 package com.hci4;
 
-import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,9 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.ImageView;
-
 import java.util.ArrayList;
-import java.util.Objects;
 
 class CustomHistoryAdapter extends ArrayAdapter<String> {
 
@@ -58,15 +55,20 @@ class CustomHistoryAdapter extends ArrayAdapter<String> {
         if(fromDestionation != null){
             viewHolder.textview8.setText(historyItems.get(position).getFrom());
             viewHolder.textview10.setText(historyItems.get(position).getDestination());
-
-            double cost = Math.random() * 11;
-            String text = String.format("%.2f", cost) + "£";
-            viewHolder.textview12.setText(text);
             viewHolder.textview14.setText(historyItems.get(position).getDate());
 
             if (historyItems.get(position).getChoice().equals("car")) {
                 viewHolder.imageViewRow.setImageResource(R.drawable.car);
-            } else viewHolder.imageViewRow.setImageResource(R.drawable.bike);
+                double cost = Math.random() * 11;
+                String text = String.format("%.2f", cost) + "£";
+                viewHolder.textview12.setText(text);
+
+            } else{
+                int cost = (int)(Math.random() * 3);
+                String text = cost + "£";
+                viewHolder.textview12.setText(text);
+                viewHolder.imageViewRow.setImageResource(R.drawable.bike);
+            }
         }
 
         return convertView;
