@@ -30,16 +30,16 @@ public class CustomRouteRowAdapter extends ArrayAdapter<String>{
         textView2.setText(parts[0]);
         textView4.setText(parts[1]);
 
-        if (position == 0) {
+        if (position == 1) {
             imageViewRouteRow.setImageResource(R.drawable.car);
 
-            double cost = Math.random()*11;
+            double cost = (Math.random()*7)+5;
             String text = String.format("%.2f", cost)+"£";
             textView6.setText(text);
         }
         else {
             imageViewRouteRow.setImageResource(R.drawable.bike);
-            int cost = (int)(Math.random()*3);
+            int cost = (int)(Math.random()*3)+1;
             String text = cost+"£";
             textView6.setText(text);
         }
