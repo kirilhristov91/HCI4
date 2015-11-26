@@ -143,6 +143,7 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, Login.class);
             intent.putExtra("username", username);
             startActivity(intent);
+            finish();
         }
 
     }
