@@ -1,6 +1,7 @@
 package com.hci4;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -17,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -135,7 +137,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         infoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(MapsActivity.this);
+                /*AlertDialog.Builder builder = new AlertDialog.Builder(MapsActivity.this);
                 LayoutInflater inflater = (MapsActivity.this).getLayoutInflater();
 
                 builder.setCancelable(false);
@@ -164,7 +166,35 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 builder.setIcon(R.drawable.directions);
                 builder.setMessage(message);
                 builder.create();
-                builder.show();
+                builder.show();*/
+
+                String message = ("Turn left onto University Avenue\n\n" +
+                        "Turn right to arrive at the bike stand\n\n" +
+                        "Cycle back and turn right onto University avenue\n\n" +
+                        "Turn slightly left to stay on university avenue\n\n" +
+                        "Turn right onto Gibson street\n\n" +
+                        "At the roundabout take the second exit onto Woodlands road\n\n" +
+                        "The bike stand should be on your right hand side\n\n" +
+                        "Continue walking onto Woodlands road\n\n" +
+                        "Turn right onto Woodlands Gate\n\n" +
+                        "Turn left onto Lynedoch Place\n\n" +
+                        "Walk 50 metres to reach your destination\n\n");
+
+                final Dialog dialog = new Dialog(MapsActivity.this);
+                dialog.setContentView(R.layout.instructions_alert);
+                TextView text = (TextView) dialog.findViewById(R.id.textInstr);
+                text.setText(message);
+                ImageView image = (ImageView) dialog.findViewById(R.id.directionsIcon);
+                image.setImageResource(R.drawable.directions);
+                Button dialogButton = (Button) dialog.findViewById(R.id.buttonInstructions);
+
+                dialogButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+                dialog.show();
             }
         });
 

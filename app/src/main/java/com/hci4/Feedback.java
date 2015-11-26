@@ -29,8 +29,6 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
 
         Button feedbackButton = (Button) findViewById(R.id.feedbackButton);
         feedbackButton.setOnClickListener(this);
-
-
     }
 
     @Override

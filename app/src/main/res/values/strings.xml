@@ -12,4 +12,5 @@
     <string name="google_maps_key">AIzaSyB1ObQ929yZ9Jzjklt0r5H9JTFNuOFj630</string>
     <string name="title_activity_feedback">Feedback</string>
     <string name="FeedbackText">Share your thoughts about this app!</string>
+    <string name="title_activity_settings">Settings</string>
 </resources>
