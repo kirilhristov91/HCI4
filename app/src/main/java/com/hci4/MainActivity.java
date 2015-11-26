@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
+import android.widget.ListView;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -55,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
         placeB.setShadowLayer(1,0,0, Color.BLACK);
         mainButton = (ImageButton) findViewById(R.id.mainButton);
         listMain = (NonScrollListView) findViewById(R.id.listMain);
-
         historyList = (NonScrollListView) findViewById(R.id.historyList);
 
         int id = dbHandler.getUserId(username);
@@ -67,14 +67,14 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < historyItems.size(); i++) {
             //System.out.println("///////////////////////////");
             //System.out.println(historyItems.get(i).getFrom() + " " + historyItems.get(i).getDestination());
-            routes[i] = historyItems.get(i).getFrom() + " - " + historyItems.get(i).getDestination();
+            routes[i] = historyItems.get(i).getFrom();
         }
-        /*
-        ArrayAdapter<History> historyAdapter =
-                new CustomHistoryAdapter(this, historyItems);
+
+        ArrayAdapter<String> historyAdapter =
+                new CustomHistoryAdapter(this, routes, historyItems);
         historyList.setAdapter(historyAdapter);
         historyList.setScrollContainer(false);
-        */
+
         mainButton.setOnClickListener(
                 new View.OnClickListener() {
                     public void onClick(View v) {

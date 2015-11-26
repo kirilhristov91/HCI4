@@ -11,18 +11,11 @@ import android.widget.ImageView;
 
 import java.util.ArrayList;
 
-class CustomHistoryAdapter extends ArrayAdapter<History> {
+class CustomHistoryAdapter extends ArrayAdapter<String> {
 
     ArrayList<History> historyItems;
-    LayoutInflater mInflater ;
-
-    Context context;
-
-    int layoutResourceId;
-
-
-    public CustomHistoryAdapter(Context context, ArrayList<History> items) {
-        super(context, R.layout.custom_row, items);
+    public CustomHistoryAdapter(Context context, String[] from, ArrayList<History> items) {
+        super(context, R.layout.custom_row, from);
         historyItems = items;
     }
 
@@ -32,10 +25,10 @@ class CustomHistoryAdapter extends ArrayAdapter<History> {
         LayoutInflater inflater = LayoutInflater.from(getContext());
         View customView = inflater.inflate(R.layout.custom_row, parent, false);
 
-        TextView textView8 = (TextView) convertView.findViewById(R.id.textView8);
-        TextView textView10 = (TextView) convertView.findViewById(R.id.textView10);
-        TextView textView12 = (TextView) convertView.findViewById(R.id.textView12);
-        TextView textView14 = (TextView) convertView.findViewById(R.id.textView14);
+        TextView textView8 = (TextView) customView.findViewById(R.id.textView8);
+        TextView textView10 = (TextView) customView.findViewById(R.id.textView10);
+        TextView textView12 = (TextView) customView.findViewById(R.id.textView12);
+        TextView textView14 = (TextView) customView.findViewById(R.id.textView14);
         ImageView imageViewRow = (ImageView) customView.findViewById(R.id.imageViewRow);
 
 
@@ -48,7 +41,7 @@ class CustomHistoryAdapter extends ArrayAdapter<History> {
 
         textView14.setText(historyItems.get(position).getDate());
 
-        if (position == 0) {
+        if (historyItems.get(position).getChoice().equals("car")) {
             imageViewRow.setImageResource(R.drawable.car);
         }
         else imageViewRow.setImageResource(R.drawable.bike);
