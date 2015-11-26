@@ -3,19 +3,27 @@
     xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
 
     <item
-        android:id="@+id/action_settings"
-        android:icon="@drawable/settingsa"
-        android:title="feedbackIcon"
-        app:showAsAction="ifRoom"/>
-    <item
         android:id="@+id/action_feedback"
         android:icon="@drawable/feedback"
         android:title="feedbackIcon"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="always"/>
 
     <item
+        android:id="@+id/action_settings"
+        android:icon="@drawable/settingsa"
+        android:title="settingsIcon"
+        app:showAsAction="always"/>
+
+
+    <item
+        android:id="@+id/action_about"
+        android:icon="@drawable/about"
+        android:title="aboutIcon"
+        app:showAsAction="always"/>
+
+        <item
         android:id="@+id/action_logout"
         android:icon="@drawable/logout"
-        android:title="feedbackIcon"
-        app:showAsAction="ifRoom"/>
+        android:title="logoutIcon"
+        app:showAsAction="always"/>
 </menu>
