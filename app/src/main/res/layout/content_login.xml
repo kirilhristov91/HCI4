@@ -15,19 +15,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="Welcome to AppName"
+        android:text="Welcome to bikeNbus"
         android:textSize="25sp"
         android:textStyle="bold"
         android:layout_gravity="center_horizontal"/>
 
-    <TextView
-        android:id="@+id/loginMoto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Travel with less emissions and improve your health!"
-        android:textSize="13sp"
-        android:layout_gravity="center_horizontal"/>
 
     <ImageView
         android:src="@drawable/bikelogo"
