@@ -8,18 +8,15 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Vibrator;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.FrameLayout;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -38,7 +35,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -46,7 +43,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Button backToMainButton;
     private Button infoButton;
     private String username;
-    TextView textView15;
     // hardcoded points for directions
     ///////////////////////////////////////////////////////////////////////////////////////////
     // route 1
@@ -59,7 +55,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private static final LatLng WolfsonTurn = new LatLng(55.872933, -4.2924772); //right
     private static final LatLng uObraznoto = new LatLng(55.8720959, -4.285546399999999); //left
     // sloji i gibson kato manevra - left
-    private static final LatLng roundAbout = new LatLng(55.8718811, -4.2782199); //nqma da go praim
+    //private static final LatLng roundAbout = new LatLng(55.8718811, -4.2782199); //nqma da go praim
     private static final LatLng chilis = new LatLng(558700316, -4.275615000000001); // right
     private static final LatLng sancho = new LatLng(55.86999179999999, -4.2758671); //left
     private static final LatLng kraqnastylbite = new LatLng(55.86977129, -4.2761828); // right
@@ -144,17 +140,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 builder.setCancelable(false);
                 builder.setTitle("");
-                builder.setIcon(R.drawable.directions);
-                builder.setView(inflater.inflate(R.layout.instructions_alert, null))
-                        // Add action buttons
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int id) {
-
-                                    }
-                                }
-                        );
-                builder.setMessage("Turn left onto University Avenue\n\n" +
+                String message = ("Turn left onto University Avenue\n\n" +
                         "Turn right to arrive at the bike stand\n\n" +
                         "Cycle back and turn right onto University avenue\n\n" +
                         "Turn slightly left to stay on university avenue\n\n" +
@@ -165,6 +151,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         "Turn right onto Woodlands Gate\n\n" +
                         "Turn left onto Lynedoch Place\n\n" +
                         "Walk 50 metres to reach your destination\n\n");
+
+                builder.setView(inflater.inflate(R.layout.instructions_alert, null))
+                        // Add action buttons
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int id) {
+
+                                    }
+                                }
+                        );
+                builder.setIcon(R.drawable.directions);
+                builder.setMessage(message);
                 builder.create();
                 builder.show();
             }
