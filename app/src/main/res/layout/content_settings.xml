@@ -10,21 +10,91 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_settings" tools:context="com.hci4.Settings">
 
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/settingsa"
-        android:layout_gravity="center_horizontal"/>
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
 
-    <TextView
-        android:layout_marginTop="10dp"
-        android:id="@+id/textSettings"
-        android:text="Change your password or update consumption!"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        android:layout_gravity="center_horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
+            <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/settingsa"
+            android:layout_gravity="center_horizontal"/>
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:id="@+id/textSettings"
+                android:text="Change your password or update consumption!"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/settingsOld"
+                android:height="40dp"
+                android:background="#FFF"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Old Password"/>
+
+            <EditText
+                android:id="@+id/settingsNew"
+                android:background="#FFF"
+                android:height="40dp"
+                android:inputType="textPassword"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:hint="New Password"/>
+
+            <Button
+                android:id="@+id/confirmPasswordChange"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Confirm Password Change"
+                android:layout_marginTop="10dp"/>
+
+            <View
+                android:layout_marginTop="40dp"
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorAccent"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                />
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:id="@+id/changeConsumptionText"
+                android:text="Update your car`s consumption per 100 miles!"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <NumberPicker
+                android:layout_marginTop="10dp"
+                android:solidColor="@color/colorBackground"
+                android:id="@+id/consumptionPicker"
+                android:layout_width="match_parent"
+                android:layout_height="140dp" />
+
+            <Button
+                android:id="@+id/confirmConsumptionChange"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Confirm Consumption Change"
+                android:layout_marginTop="10dp"/>
+
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

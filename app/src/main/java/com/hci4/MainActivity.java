@@ -161,6 +161,13 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }
 
+        if(id==R.id.action_settings){
+            Intent intent = new Intent(MainActivity.this, Settings.class);
+            intent.putExtra("username", username);
+            startActivity(intent);
+            finish();
+        }
+
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_logout) {
             dbHandler.updateUser(username, 0);
