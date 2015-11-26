@@ -39,7 +39,7 @@
                 android:id="@+id/settingsOld"
                 android:height="40dp"
                 android:background="#FFF"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Old Password"/>
@@ -62,7 +62,7 @@
                 android:layout_marginTop="10dp"/>
 
             <View
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="10dp"
                 android:layout_width="fill_parent"
                 android:layout_height="1dp"
                 android:background="@color/colorAccent"
@@ -81,7 +81,7 @@
                 android:layout_height="wrap_content" />
 
             <NumberPicker
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="2dp"
                 android:solidColor="@color/colorBackground"
                 android:id="@+id/consumptionPickerSettings"
                 android:layout_width="match_parent"
