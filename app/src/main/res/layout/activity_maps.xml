@@ -13,9 +13,14 @@
         android:layout_height="match_parent" android:id="@+id/map" tools:context="com.hci4.MapsActivity"
         android:name="com.google.android.gms.maps.SupportMapFragment" />
 
-    <android.support.design.widget.FloatingActionButton android:id="@+id/mapsButton"
+    <android.support.design.widget.FloatingActionButton android:id="@+id/mapsDirections"
         android:layout_width="wrap_content" android:layout_height="wrap_content"
         android:layout_gravity="bottom|end" android:layout_margin="@dimen/fab_margin"
         android:src="@android:drawable/ic_menu_directions" />
+
+    <android.support.design.widget.FloatingActionButton android:id="@+id/goToMain"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:layout_gravity="bottom|start" android:layout_margin="@dimen/fab_margin"
+        android:src="@android:drawable/ic_menu_search" />
 
 </android.support.design.widget.CoordinatorLayout>

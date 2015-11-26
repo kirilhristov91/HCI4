@@ -1,7 +1,9 @@
 package com.hci4;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
@@ -14,8 +16,11 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -38,9 +43,10 @@ import java.util.Map;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private Button mapsButton;
+    private Button backToMainButton;
+    private Button infoButton;
     private String username;
-
+    TextView textView15;
     // hardcoded points for directions
     ///////////////////////////////////////////////////////////////////////////////////////////
     // route 1
@@ -118,8 +124,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         username = intent.getStringExtra("username");
 
 
-        FloatingActionButton mapsButton = (FloatingActionButton) findViewById(R.id.mapsButton);
-        mapsButton.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton backToMainButton = (FloatingActionButton) findViewById(R.id.goToMain);
+        backToMainButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MapsActivity.this, MainActivity.class);
@@ -128,6 +134,42 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 finish();
             }
         });
+
+        FloatingActionButton infoButton = (FloatingActionButton) findViewById(R.id.mapsDirections);
+        infoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(MapsActivity.this);
+                LayoutInflater inflater = (MapsActivity.this).getLayoutInflater();
+
+                builder.setCancelable(false);
+                builder.setTitle("");
+                builder.setIcon(R.drawable.directions);
+                builder.setView(inflater.inflate(R.layout.instructions_alert, null))
+                        // Add action buttons
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int id) {
+
+                                    }
+                                }
+                        );
+                builder.setMessage("Turn left onto University Avenue\n\n" +
+                        "Turn right to arrive at the bike stand\n\n" +
+                        "Cycle back and turn right onto University avenue\n\n" +
+                        "Turn slightly left to stay on university avenue\n\n" +
+                        "Turn right onto Gibson street\n\n" +
+                        "At the roundabout take the second exit onto Woodlands road\n\n" +
+                        "The bike stand should be on your right hand side\n\n" +
+                        "Continue walking onto Woodlands road\n\n" +
+                        "Turn right onto Woodlands Gate\n\n" +
+                        "Turn left onto Lynedoch Place\n\n" +
+                        "Walk 50 metres to reach your destination\n\n");
+                builder.create();
+                builder.show();
+            }
+        });
+
 
         mMap.addMarker(new MarkerOptions().position(stand_Central_Station).title("Central Station").icon(BitmapDescriptorFactory.fromResource(R.drawable.nextbikemarker)));
         mMap.addMarker(new MarkerOptions().position(stand_Waterloo_Street).title("Waterlo Street").icon(BitmapDescriptorFactory.fromResource(R.drawable.nextbikemarker)));
@@ -196,23 +238,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     }
-
-    /*
-    *  // route 1
-
-    private static final LatLng UNI = new LatLng(55.8719, -4.2875);
-    private static final LatLng Home = new LatLng(55.8691926, -4.2761092);
-    private static final LatLng BoydOrr = new LatLng(55.873083, -4.29257);
-    private static final LatLng GibsonTrafficLight = new LatLng(55.872806, -4.284307);
-    // route 1 manouver points
-    private static final LatLng WolfsonTurn = new LatLng(55.872933, -4.2924772); //right
-    private static final LatLng uObraznoto = new LatLng(55.8720959, -4.285546399999999); //left
-    // sloji i gibson kato manevra - left
-    private static final LatLng roundAbout = new LatLng(55.8718811, -4.2782199); //nqma da go praim
-    private static final LatLng chilis = new LatLng(558700316, -4.275615000000001); // right
-    private static final LatLng sancho = new LatLng(55.86999179999999, -4.2758671); //left
-    private static final LatLng kraqnastylbite = new LatLng(55.86977129, -4.2761828); // right
-    private static final LatLng nakraq = new LatLng(55.869697, -4.2765961);//left*/
 
     private GoogleMap.OnMyLocationChangeListener myLocationChanged(){
         return new GoogleMap.OnMyLocationChangeListener() {

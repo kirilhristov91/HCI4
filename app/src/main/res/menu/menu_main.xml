@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/action_editprofile"
-        android:icon="@drawable/editprofile"
+        android:icon="@drawable/settingsa"
         android:title="feedbackIcon"
         app:showAsAction="ifRoom"/>
     <item
