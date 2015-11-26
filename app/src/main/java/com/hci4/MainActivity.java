@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
-
+        System.out.println("USERNAME IS : " + username);
         mainLayout = (LinearLayout) findViewById(R.id.mainLayout);
         dbHandler = DatabaseHandler.getInstance(this);
         placeA = (EditText) findViewById(R.id.placeA);

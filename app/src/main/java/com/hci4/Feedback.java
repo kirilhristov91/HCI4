@@ -27,6 +27,21 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
 
         Button feedbackButton = (Button) findViewById(R.id.feedbackButton);
         feedbackButton.setOnClickListener(this);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.putExtra("username", username);
+                startActivity(intent);
+                break;
+        }
+        return true;
     }
 
     @Override

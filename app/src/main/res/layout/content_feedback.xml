@@ -7,7 +7,15 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_feedback" tools:context="com.hci4.Feedback">
 
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/feedback"
+        android:layout_gravity="center_horizontal"/>
+
     <TextView
+        android:layout_marginTop="10dp"
         android:id="@+id/textFeedback"
         android:text="@string/FeedbackText"
         android:textSize="15sp"
@@ -16,22 +24,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-
-    <EditText
-        android:id="@+id/email"
-        android:hint="Your E-mail"
-        android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:background="#FFF"
-        android:layout_height="40dp" />
-
     <EditText
         android:id="@+id/feedbacktextET"
         android:layout_width="match_parent"
         android:background="#FFF"
         android:hint="Type your feedback here..."
         android:layout_marginTop="20dp"
-        android:layout_height="250dp" />
+        android:layout_height="200dp" />
 
     <Button
         android:id="@+id/feedbackButton"

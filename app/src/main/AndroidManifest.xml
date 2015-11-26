@@ -72,8 +72,10 @@
         <activity
             android:name=".Feedback"
             android:label="@string/title_activity_feedback"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.hci4.MainActivity" />
         </activity>
     </application>
 
