@@ -177,6 +177,21 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 
     }
 
+
+    public void updatePassword(String username, String newpassword){
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL( "UPDATE " + TABLE_USER +
+                    " SET " + COLUMN_PASSWORD + "=\"" + newpassword + "\"" +
+                    " WHERE " + COLUMN_USERNAME + "=\"" + username + "\";");
+    }
+
+    public void updateConsumption(String username, int newConsumption){
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL( "UPDATE " + TABLE_USER +
+                " SET " + COLUMN_PASSWORD + "=" + newConsumption  +
+                " WHERE " + COLUMN_USERNAME + "=\"" + username + "\";");
+    }
+
     public boolean authenticate(String username, String password){
         SQLiteDatabase db = getWritableDatabase();
         String query = "SELECT *" +
