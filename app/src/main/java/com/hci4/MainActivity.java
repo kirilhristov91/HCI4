@@ -158,6 +158,7 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, Feedback.class);
             intent.putExtra("username", username);
             startActivity(intent);
+            finish();
         }
 
         //noinspection SimplifiableIfStatement
@@ -165,6 +166,7 @@ public class MainActivity extends AppCompatActivity {
             dbHandler.updateUser(username, 0);
             Intent intent = new Intent(this, Login.class);
             startActivity(intent);
+            finish();
         }
 
         return super.onOptionsItemSelected(item);

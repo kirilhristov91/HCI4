@@ -1,6 +1,7 @@
 package com.hci4;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -21,27 +22,39 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
         setContentView(R.layout.activity_feedback);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
 
         Button feedbackButton = (Button) findViewById(R.id.feedbackButton);
         feedbackButton.setOnClickListener(this);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
-            case android.R.id.home:
-                Intent intent = new Intent(this, MainActivity.class);
-                intent.putExtra("username", username);
-                startActivity(intent);
-                break;
-        }
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.backtohome_menu, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        if (id == R.id.action_gohome) {
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("username", username);
+            startActivity(intent);
+            finish();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -51,7 +64,9 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
                 Intent intent = new Intent(this, MainActivity.class);
                 intent.putExtra("username", username);
                 startActivity(intent);
+                finish();
                 break;
+
         }
     }
 
