@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             String choice;
-                            if(position == 0) choice = "car";
+                            if(position == 1) choice = "car";
                             else choice = "bike";
                             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
                             Date date = new Date();
