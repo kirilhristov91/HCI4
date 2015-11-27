@@ -24,6 +24,7 @@ class CustomHistoryAdapter extends ArrayAdapter<String> {
         TextView textview10;
         TextView textview12;
         TextView textview14;
+        TextView textViewHistoryCal;
         ImageView imageViewRow;
     }
 
@@ -43,6 +44,7 @@ class CustomHistoryAdapter extends ArrayAdapter<String> {
             viewHolder.textview10 = (TextView) convertView.findViewById(R.id.textView10);
             viewHolder.textview12 = (TextView) convertView.findViewById(R.id.textView12);
             viewHolder.textview14 = (TextView) convertView.findViewById(R.id.textView14);
+            viewHolder.textViewHistoryCal = (TextView) convertView.findViewById(R.id.textViewHistoryCal);
             viewHolder.imageViewRow = (ImageView) convertView.findViewById(R.id.imageViewRow);
 
             convertView.setTag(viewHolder);
@@ -62,12 +64,15 @@ class CustomHistoryAdapter extends ArrayAdapter<String> {
                 double cost = Math.random() * 11;
                 String text = String.format("%.2f", cost) + "£";
                 viewHolder.textview12.setText(text);
+                viewHolder.textViewHistoryCal.setText("0 Cal burned");
 
             } else{
                 int cost = (int)(Math.random() * 3);
                 String text = cost + "£";
                 viewHolder.textview12.setText(text);
                 viewHolder.imageViewRow.setImageResource(R.drawable.bike);
+                int calories = (int)(Math.random()*900)+1;
+                viewHolder.textViewHistoryCal.setText(calories+" Cal burned");
             }
         }
 

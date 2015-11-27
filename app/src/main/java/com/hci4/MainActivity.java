@@ -19,6 +19,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -74,6 +75,24 @@ public class MainActivity extends AppCompatActivity {
                 new CustomHistoryAdapter(this, routes, historyItems);
         historyList.setAdapter(historyAdapter);
         historyList.setScrollContainer(false);
+
+        TextView money = (TextView) findViewById(R.id.moneySpend);
+        TextView calories = (TextView) findViewById(R.id.CaloriesBurned);
+
+        int bike=0;
+        for(int i=0; i<historyItems.size();i++){
+            if(historyItems.get(i).getChoice().equals("bike")){
+                bike++;
+
+            }
+        }
+
+        double m = bike * ((Math.random() * 11)-(int)(Math.random() * 3));
+        String mtext = String.format("%.2f", m) + "£";
+        int cal = bike * ((int)(Math.random()*900)+1);
+
+        money.setText("Money saved using bike/bus routes: " + mtext);
+        calories.setText("Overall calories burned: " + cal + " Cal");
 
         mainButton.setOnClickListener(
                 new View.OnClickListener() {
