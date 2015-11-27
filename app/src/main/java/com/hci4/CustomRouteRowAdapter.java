@@ -23,6 +23,7 @@ public class CustomRouteRowAdapter extends ArrayAdapter<String>{
         TextView textView2 = (TextView) customView.findViewById(R.id.textView2);
         TextView textView4 = (TextView) customView.findViewById(R.id.textView4);
         TextView textView6 = (TextView) customView.findViewById(R.id.textView6);
+        TextView textViewCaloriesCount = (TextView) customView.findViewById(R.id.textViewCaloriesCount);
         ImageView imageViewRouteRow = (ImageView) customView.findViewById(R.id.imageViewRouteRow);
 
         String[] parts = singleRouteItem.split(" ",2);
@@ -36,12 +37,15 @@ public class CustomRouteRowAdapter extends ArrayAdapter<String>{
             double cost = (Math.random()*7)+5;
             String text = String.format("%.2f", cost)+"£";
             textView6.setText(text);
+            textViewCaloriesCount.setText("0 Cal to be burned");
         }
         else {
             imageViewRouteRow.setImageResource(R.drawable.bike);
-            int cost = (int)(Math.random()*3)+1;
+            int cost = (int)(Math.random()*2)+1;
             String text = cost+"£";
             textView6.setText(text);
+            int calories = (int)(Math.random()*900)+1;
+            textViewCaloriesCount.setText(calories +" Cal to be burned");
         }
         return customView;
     }
