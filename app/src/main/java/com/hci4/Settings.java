@@ -80,7 +80,7 @@ public class Settings extends AppCompatActivity {
                 dbHandler.updateConsumption(username, consumption);
                 String text = "Your consumption has been changed successfully";
                 Toast toast = Toast.makeText(Settings.this, text , Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.TOP|Gravity.CENTER, 0, 0);
+                toast.setGravity(Gravity.CENTER|Gravity.CENTER, 0, 0);
                 toast.show();
             }
         });

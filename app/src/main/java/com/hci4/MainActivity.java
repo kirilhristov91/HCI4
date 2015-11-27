@@ -18,11 +18,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
-
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -124,11 +121,11 @@ public class MainActivity extends AppCompatActivity {
                             String choice;
                             if(position == 1) choice = "car";
                             else choice = "bike";
-                            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                            DateFormat dateFormat = DateFormat.getDateInstance();
                             Date date = new Date();
                             System.out.println(username);
                             History h = new History(dbHandler.getUserId(username), placeA.getText().toString(),
-                                                    placeB.getText().toString(), dateFormat.format(date).toString(), choice);
+                                                    placeB.getText().toString(), dateFormat.format(date), choice);
                             dbHandler.addToHistory(h);
                             Intent intent = new Intent(MainActivity.this, MapsActivity.class);
                             intent.putExtra("username", username);
