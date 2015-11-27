@@ -59,7 +59,7 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyB1ObQ929yZ9Jzjklt0r5H9JTFNuOFj630" />
+            android:value="AIzaSyBE1Dp9m13QUgkTNbbmBGDWoZPJEsSkVws" />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -72,9 +72,6 @@
             android:name=".Feedback"
             android:label="@string/title_activity_feedback"
             android:theme="@style/AppTheme.NoActionBar" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.hci4.MainActivity" />
         </activity>
         <activity
             android:name=".Settings"

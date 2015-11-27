@@ -137,37 +137,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         infoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*AlertDialog.Builder builder = new AlertDialog.Builder(MapsActivity.this);
-                LayoutInflater inflater = (MapsActivity.this).getLayoutInflater();
-
-                builder.setCancelable(false);
-                builder.setTitle("");
-                String message = ("Turn left onto University Avenue\n\n" +
-                        "Turn right to arrive at the bike stand\n\n" +
-                        "Cycle back and turn right onto University avenue\n\n" +
-                        "Turn slightly left to stay on university avenue\n\n" +
-                        "Turn right onto Gibson street\n\n" +
-                        "At the roundabout take the second exit onto Woodlands road\n\n" +
-                        "The bike stand should be on your right hand side\n\n" +
-                        "Continue walking onto Woodlands road\n\n" +
-                        "Turn right onto Woodlands Gate\n\n" +
-                        "Turn left onto Lynedoch Place\n\n" +
-                        "Walk 50 metres to reach your destination\n\n");
-
-                builder.setView(inflater.inflate(R.layout.instructions_alert, null))
-                        // Add action buttons
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int id) {
-
-                                    }
-                                }
-                        );
-                builder.setIcon(R.drawable.directions);
-                builder.setMessage(message);
-                builder.create();
-                builder.show();*/
-
                 String message = ("Turn left onto University Avenue\n\n" +
                         "Turn right to arrive at the bike stand\n\n" +
                         "Cycle back and turn right onto University avenue\n\n" +
@@ -357,7 +326,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         urlString.append(",");
         urlString.append(Double.toString(dest.longitude));
         urlString.append("&sensor=false&mode="+mode+"&alternatives=false");
-        urlString.append("&key=AIzaSyB1ObQ929yZ9Jzjklt0r5H9JTFNuOFj630");
+        //urlString.append("&key=AIzaSyBMWishTQ20WwilNIL875lhOhtwmkF47_0");
         return urlString.toString();
     }
 
