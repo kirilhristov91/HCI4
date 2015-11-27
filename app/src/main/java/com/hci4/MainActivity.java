@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
     DatabaseHandler dbHandler;
     String username;
-
+    TextView select;
     LinearLayout mainLayout;
     EditText placeA;
     EditText placeB;
@@ -55,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
         mainButton = (ImageButton) findViewById(R.id.mainButton);
         listMain = (NonScrollListView) findViewById(R.id.listMain);
         historyList = (NonScrollListView) findViewById(R.id.historyList);
+
+        select = (TextView) findViewById(R.id.Select);
 
         int id = dbHandler.getUserId(username);
         ArrayList<History> historyItems = dbHandler.getHistory(id);
@@ -111,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
             routes[0] = placeA.getText().toString() + " " + placeB.getText().toString();
             routes[1] = placeA.getText().toString() + " " + placeB.getText().toString();
             //System.out.println(placeA.getText().toString() + " - " + placeB.getText().toString());
+            select.setText("Select");
             ListAdapter routesAdapter = new CustomRouteRowAdapter(this, routes);
             listMain.setAdapter(routesAdapter);
             listMain.setScrollContainer(false);
