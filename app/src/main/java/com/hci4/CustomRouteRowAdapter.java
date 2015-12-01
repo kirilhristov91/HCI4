@@ -42,6 +42,7 @@ public class CustomRouteRowAdapter extends ArrayAdapter<String>{
         else {
             imageViewRouteRow.setImageResource(R.drawable.bike);
             int cost = (int)(Math.random()*2)+1;
+            if (cost==2) cost=1;
             String text = cost+"£";
             textView6.setText(text);
             int calories = (int)(Math.random()*900)+1;

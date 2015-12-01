@@ -45,7 +45,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Button backToMainButton;
     private Button infoButton;
     private String username;
-
+    int position;
     boolean distance1bool = false;
     boolean distance2bool = false;
     boolean distance3bool = false;
@@ -70,8 +70,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private static final LatLng uObraznoto = new LatLng(55.8720959, -4.285546399999999); //left
     // sloji i gibson kato manevra - left
     //private static final LatLng roundAbout = new LatLng(55.8718811, -4.2782199); //nqma da go praim
-    private static final LatLng chilis = new LatLng(558700316, -4.275615000000001); // right
-    private static final LatLng sancho = new LatLng(55.86999179999999, -4.2758671); //left
+    private static final LatLng chilis = new LatLng(55.870033, -4.275622); // right
+    private static final LatLng sancho = new LatLng(55.869808, -4.275219); //right
     private static final LatLng kraqnastylbite = new LatLng(55.86977129, -4.2761828); // right
     private static final LatLng nakraq = new LatLng(55.869697, -4.2765961);//left
 
@@ -132,7 +132,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
-        int position = intent.getIntExtra("position",0);
+        position = intent.getIntExtra("position", 0);
 
 
         FloatingActionButton backToMainButton = (FloatingActionButton) findViewById(R.id.goToMain);
@@ -244,7 +244,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         mMap.addMarker(new MarkerOptions().position(BoydOrr).title("BoydOrr"));
         mMap.addMarker(new MarkerOptions().position(Home).title("Home"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(UNI, 13));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(UNI, 15));
 
         mMap.setMyLocationEnabled(true);
         Location myLocation = mMap.getMyLocation();
@@ -257,7 +257,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             @Override
             public void onMyLocationChange(Location location) {
-
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(),location.getLongitude()), 15));
                 Vibrator v = (Vibrator) MapsActivity.this.getSystemService(Context.VIBRATOR_SERVICE);
                 Location u = new Location("");
                 int dot=200;
@@ -271,16 +271,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 u.setLatitude(WolfsonTurn.latitude);
                 u.setLongitude(WolfsonTurn.longitude);
                 float distance = u.distanceTo(location);
-                if(distance < 10 && !distance1bool){
+                if(distance < 10 && position==0){
                     v.vibrate(dot);
-                    distance1bool = true;
+                    //distance1bool = true;
                 }
 
                 //right
                 u.setLatitude(chilis.latitude);
                 u.setLongitude(chilis.longitude);
                 float distance2 = u.distanceTo(location);
-                if(distance2 < 10 && !distance2bool){
+                if(distance2 < 10 && !distance2bool && position==0){
                     v.vibrate(dot);
                     distance2bool = true;
                 }
@@ -289,7 +289,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 u.setLatitude(kraqnastylbite.latitude);
                 u.setLongitude(kraqnastylbite.longitude);
                 float distance3 = u.distanceTo(location);
-                if(distance3 < 10 && !distance3bool){
+                if(distance3 < 10 && !distance3bool && position==0){
                     v.vibrate(dot);
                     distance3bool = true;
                 }
@@ -316,8 +316,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 u.setLatitude(sancho.latitude);
                 u.setLongitude(sancho.longitude);
                 float distance6 = u.distanceTo(location);
-                if(distance6 < 10 && !distance6bool){
-                    v.vibrate(1000);
+                if(distance6 < 10 && !distance6bool && position ==1){
+                    v.vibrate(dot);
                     distance6bool = true;
                 }
 
@@ -334,7 +334,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 u.setLatitude(stand_University_of_Glasgow_West.latitude);
                 u.setLongitude(stand_University_of_Glasgow_West.longitude);
                 float distance8 = u.distanceTo(location);
-                if(distance8 < 10 && !distance8bool){
+                if(distance8 < 20 && !distance8bool && position==0){
                     v.vibrate(changeType);
                     distance8bool = true;
                 }
@@ -343,7 +343,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 u.setLatitude(stand_University_of_Glasgow_East.latitude);
                 u.setLongitude(stand_University_of_Glasgow_East.longitude);
                 float distance9 = u.distanceTo(location);
-                if(distance9 < 10 && !distance9bool){
+                if(distance9 < 30 && !distance9bool && position==0){
                     v.vibrate(changeType);
                     distance9bool = true;
                 }
@@ -352,7 +352,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 u.setLatitude(Home.latitude);
                 u.setLongitude(Home.longitude);
                 float distance10 = u.distanceTo(location);
-                if(distance10 < 10 && !distance10bool){
+                if(distance10 < 30 && !distance10bool){
                     v.vibrate(destReach);
                     distance10bool = true;
                 }
