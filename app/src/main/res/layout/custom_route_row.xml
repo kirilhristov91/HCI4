@@ -17,6 +17,7 @@
             android:layout_height="60dp"
             android:id="@+id/imageViewRouteRow"
             android:src="@drawable/bikelogo"
+            android:layout_centerVertical="true"
             android:layout_margin="5dp" />
 
         <TextView
