@@ -45,6 +45,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Button backToMainButton;
     private Button infoButton;
     private String username;
+
+    boolean distance1bool = false;
+    boolean distance2bool = false;
+    boolean distance3bool = false;
+    boolean distance4bool = false;
+    boolean distance5bool = false ;
+    boolean distance6bool = false ;
+    boolean distance7bool = false ;
+    boolean distance8bool = false;
+    boolean distance9bool = false;
+    boolean distance10bool = false;
+
     // hardcoded points for directions
     ///////////////////////////////////////////////////////////////////////////////////////////
     // route 1
@@ -248,70 +260,102 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 Vibrator v = (Vibrator) MapsActivity.this.getSystemService(Context.VIBRATOR_SERVICE);
                 Location u = new Location("");
+                int dot=200;
+                int gap=200;
+                int changeType = 1000;
+                int destReach = 1500;
+                long pattern[] = {0,dot,gap,dot};
 
+
+                //right
                 u.setLatitude(WolfsonTurn.latitude);
                 u.setLongitude(WolfsonTurn.longitude);
                 float distance = u.distanceTo(location);
-                if(distance < 10){
-                    v.vibrate(500);
+                if(distance < 10 && !distance1bool){
+                    v.vibrate(dot);
+                    distance1bool = true;
                 }
 
+                //right
                 u.setLatitude(chilis.latitude);
                 u.setLongitude(chilis.longitude);
                 float distance2 = u.distanceTo(location);
-                if(distance2 < 10){
-                    v.vibrate(3000);
+                if(distance2 < 10 && !distance2bool){
+                    v.vibrate(dot);
+                    distance2bool = true;
                 }
+
+                //right
                 u.setLatitude(kraqnastylbite.latitude);
                 u.setLongitude(kraqnastylbite.longitude);
                 float distance3 = u.distanceTo(location);
-                if(distance3 < 10){
-                    v.vibrate(3000);
+                if(distance3 < 10 && !distance3bool){
+                    v.vibrate(dot);
+                    distance3bool = true;
                 }
+
+                //right
                 u.setLatitude(GibsonTrafficLight.latitude);
                 u.setLongitude(GibsonTrafficLight.longitude);
                 float distance4 = u.distanceTo(location);
-                if(distance4 < 10){
-                    v.vibrate(1000);
+                if(distance4 < 10 && !distance4bool){
+                    v.vibrate(dot);
+                    distance4bool = true;
                 }
+
+                //left
                 u.setLatitude(uObraznoto.latitude);
                 u.setLongitude(uObraznoto.longitude);
                 float distance5 = u.distanceTo(location);
-                if(distance5 < 10){
-                    v.vibrate(1000);
+                if(distance5 < 10 && !distance5bool){
+                    v.vibrate(pattern,-1);
+                    distance5bool = true;
                 }
+
+                //right - !!!!!!! ne sym siguren
                 u.setLatitude(sancho.latitude);
                 u.setLongitude(sancho.longitude);
                 float distance6 = u.distanceTo(location);
-                if(distance6 < 10){
+                if(distance6 < 10 && !distance6bool){
                     v.vibrate(1000);
+                    distance6bool = true;
                 }
+
+                //left
                 u.setLatitude(nakraq.latitude);
                 u.setLongitude(nakraq.longitude);
                 float distance7 = u.distanceTo(location);
-                if(distance7 < 10){
-                    v.vibrate(1000);
+                if(distance7 < 10 && !distance7bool){
+                    v.vibrate(pattern,-1);
+                    distance7bool=true;
                 }
+
+                //change type
                 u.setLatitude(stand_University_of_Glasgow_West.latitude);
                 u.setLongitude(stand_University_of_Glasgow_West.longitude);
                 float distance8 = u.distanceTo(location);
-                if(distance8 < 10){
-                    v.vibrate(2000);
+                if(distance8 < 10 && !distance8bool){
+                    v.vibrate(changeType);
+                    distance8bool = true;
                 }
+
+                //change type
                 u.setLatitude(stand_University_of_Glasgow_East.latitude);
                 u.setLongitude(stand_University_of_Glasgow_East.longitude);
                 float distance9 = u.distanceTo(location);
-                if(distance9 < 10){
-                    v.vibrate(2000);
-                } u.setLatitude(Home.latitude);
-                u.setLongitude(Home.longitude);
-                float distance10 = u.distanceTo(location);
-                if(distance10 < 10){
-                    v.vibrate(2000);
+                if(distance9 < 10 && !distance9bool){
+                    v.vibrate(changeType);
+                    distance9bool = true;
                 }
 
-
-
+                //reach dest
+                u.setLatitude(Home.latitude);
+                u.setLongitude(Home.longitude);
+                float distance10 = u.distanceTo(location);
+                if(distance10 < 10 && !distance10bool){
+                    v.vibrate(destReach);
+                    distance10bool = true;
+                }
             }
         };
     }
