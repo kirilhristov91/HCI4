@@ -120,6 +120,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
+        int position = intent.getIntExtra("position",0);
 
 
         FloatingActionButton backToMainButton = (FloatingActionButton) findViewById(R.id.goToMain);
@@ -210,19 +211,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addMarker(new MarkerOptions().position(stand_Queens_Park_West).title("Queens Park West").icon(BitmapDescriptorFactory.fromResource(R.drawable.nextbikemarker)));
         mMap.addMarker(new MarkerOptions().position(stand_Buchanan_Street_Bus_Station).title("Buchanan Street Bus Station").icon(BitmapDescriptorFactory.fromResource(R.drawable.nextbikemarker)));
 
-        // ot boyd orr do kolelata
-        String route = makeURL(BoydOrr, stand_University_of_Glasgow_West, "walking");
-        new connectAsyncTask(route, Color.GREEN).execute();
+        if (position == 0) {
+            // ot boyd orr do kolelata
+            String route = makeURL(BoydOrr, stand_University_of_Glasgow_West, "walking");
+            new connectAsyncTask(route, Color.GREEN).execute();
 
-        String route2 = makeURL(stand_University_of_Glasgow_West, GibsonTrafficLight, "bicycling");
-        new connectAsyncTask(route2, Color.BLUE).execute();
+            String route2 = makeURL(stand_University_of_Glasgow_West, GibsonTrafficLight, "bicycling");
+            new connectAsyncTask(route2, Color.BLUE).execute();
 
-        String route3 = makeURL(GibsonTrafficLight, stand_University_of_Glasgow_East, "bicycling");
-        new connectAsyncTask(route3, Color.BLUE).execute();
+            String route3 = makeURL(GibsonTrafficLight, stand_University_of_Glasgow_East, "bicycling");
+            new connectAsyncTask(route3, Color.BLUE).execute();
 
-        String route4 = makeURL(stand_University_of_Glasgow_East, Home, "walking");
-        new connectAsyncTask(route4, Color.GREEN).execute();
-
+            String route4 = makeURL(stand_University_of_Glasgow_East, Home, "walking");
+            new connectAsyncTask(route4, Color.GREEN).execute();
+        }
+        else {
+            String carRoute = makeURL(BoydOrr, Home, "driving");
+            new connectAsyncTask(carRoute, Color.RED).execute();
+        }
 
         mMap.addMarker(new MarkerOptions().position(BoydOrr).title("BoydOrr"));
         mMap.addMarker(new MarkerOptions().position(Home).title("Home"));
@@ -232,8 +238,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Location myLocation = mMap.getMyLocation();
 
         mMap.setOnMyLocationChangeListener(myLocationChanged());
-
-
     }
 
     private GoogleMap.OnMyLocationChangeListener myLocationChanged(){

@@ -26,7 +26,7 @@ public class CustomRouteRowAdapter extends ArrayAdapter<String>{
         TextView textViewCaloriesCount = (TextView) customView.findViewById(R.id.textViewCaloriesCount);
         ImageView imageViewRouteRow = (ImageView) customView.findViewById(R.id.imageViewRouteRow);
 
-        String[] parts = singleRouteItem.split(" ",2);
+        String[] parts = singleRouteItem.split("-",2);
 
         textView2.setText(parts[0]);
         textView4.setText(parts[1]);

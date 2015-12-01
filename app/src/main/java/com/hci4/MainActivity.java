@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
-        System.out.println("USERNAME IS : " + username);
+        //System.out.println("USERNAME IS : " + username);
         mainLayout = (LinearLayout) findViewById(R.id.mainLayout);
         dbHandler = DatabaseHandler.getInstance(this);
         placeA = (EditText) findViewById(R.id.placeA);
@@ -110,8 +110,8 @@ public class MainActivity extends AppCompatActivity {
             showError();
         } else {
             String[] routes = new String[2];
-            routes[0] = placeA.getText().toString() + " " + placeB.getText().toString();
-            routes[1] = placeA.getText().toString() + " " + placeB.getText().toString();
+            routes[0] = placeA.getText().toString() + "-" + placeB.getText().toString();
+            routes[1] = placeA.getText().toString() + "-" + placeB.getText().toString();
             //System.out.println(placeA.getText().toString() + " - " + placeB.getText().toString());
             select.setText("Select");
             ListAdapter routesAdapter = new CustomRouteRowAdapter(this, routes);
@@ -132,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
                             dbHandler.addToHistory(h);
                             Intent intent = new Intent(MainActivity.this, MapsActivity.class);
                             intent.putExtra("username", username);
+                            intent.putExtra("position", position);
                             startActivity(intent);
                             finish();
                         }
