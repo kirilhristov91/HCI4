@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     ImageButton mainButton;
     NonScrollListView listMain;
     NonScrollListView historyList;
+    ArrayList<History> historyItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         select = (TextView) findViewById(R.id.Select);
 
         int id = dbHandler.getUserId(username);
-        ArrayList<History> historyItems = dbHandler.getHistory(id);
+        historyItems = dbHandler.getHistory(id);
 
 
         String[] routes = new String[historyItems.size()];
